@@ -20,6 +20,7 @@ class _MyDiscoverState extends State<MyDiscover> {
     'https://app.yummybox.fr/storage/326/Lunch.png',
   ];
 
+
   final List _gridItemTitle = [
     'Fruits/legumes',
     'Divers',

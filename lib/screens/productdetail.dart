@@ -5,6 +5,7 @@ import 'package:yummy_box/widgets/drawer.dart';
 class ProucttDetail extends StatelessWidget {
   const ProucttDetail({Key? key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
