@@ -1,11 +1,22 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:yummy_box/screens/recharge.dart';
+import 'package:yummy_box/screens/reservation.dart';
+import 'package:yummy_box/screens/servicesdetail.dart';
+import 'package:yummy_box/screens/sign-in.dart';
 import 'package:yummy_box/widgets/drawer.dart';
 
-class MyProfile extends StatelessWidget {
+import 'editprofile.dart';
+
+class MyProfile extends StatefulWidget {
   const MyProfile({Key? key}) : super(key: key);
 
+  @override
+  State<MyProfile> createState() => _MyProfileState();
+}
+
+class _MyProfileState extends State<MyProfile> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,14 +33,14 @@ class MyProfile extends StatelessWidget {
                   },
                   icon: Icon(Icons.arrow_back)
                   ),
-            
+
               SizedBox(
                 width: 70,
               ),
               Text(
                 "My Profile",
                 style: TextStyle(
-                  color: Color.fromARGB(255, 197, 54, 106),
+                  color: Colors.black,
                 ),
               ),
             ],
@@ -60,7 +71,10 @@ class MyProfile extends StatelessWidget {
                   height: 15,
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+
+                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => EditProfile()));
+                  },
                   style: ElevatedButton.styleFrom(
                     primary: Colors.green,
                   ),
@@ -72,6 +86,7 @@ class MyProfile extends StatelessWidget {
                 Card(
                   elevation: 1,
                   child: ListTile(
+
                     title: Text(
                       "My reservations",
                       style: TextStyle(
@@ -79,6 +94,11 @@ class MyProfile extends StatelessWidget {
                       ),
                     ),
                     trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => SignIn(),
+                      ),
+                      );
+                    },
                   ),
                 ),
                 Card(
@@ -91,6 +111,11 @@ class MyProfile extends StatelessWidget {
                       ),
                     ),
                     trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => MyRecharge(),
+                      ),
+                      );
+                    },
                   ),
                 ),
                 Card(
@@ -103,6 +128,11 @@ class MyProfile extends StatelessWidget {
                       ),
                     ),
                     trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => ServiceDetails(),
+                      ),
+                      );
+                    },
                   ),
                 ),
                 Card(
@@ -121,30 +151,7 @@ class MyProfile extends StatelessWidget {
             ),
           ),
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.white,
-          selectedItemColor: Color.fromARGB(255, 197, 54, 106),
-          unselectedItemColor: Colors.black.withOpacity(.60),
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home_filled),
-              label: 'Discover',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.place),
-              label: 'Map',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.favorite),
-              label: 'Basket',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.book),
-              label: 'Reservation',
-            ),
-          ],
-        ),
+
       ),
     );
   }
