@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:badges/badges.dart';
+import 'package:yummy_box/screens/productdetail.dart';
 
 class MyBasket extends StatefulWidget {
   const MyBasket({Key? key}) : super(key: key);
@@ -8,283 +10,214 @@ class MyBasket extends StatefulWidget {
 }
 
 class _MyBasketState extends State<MyBasket> {
+  final List imageUrl = [
+    'https://app.yummybox.fr/storage/331/Fruits.png',
+    'https://app.yummybox.fr/storage/330/Divers.png',
+    'https://app.yummybox.fr/storage/329/Produits-Bio.png',
+    'https://app.yummybox.fr/storage/328/Epicerie.png',
+    'https://app.yummybox.fr/storage/327/Boulangerie.png',
+    'https://app.yummybox.fr/storage/326/Lunch.png',
+  ];
 
+  final List _gridItemTitle = [
+    'Fruits/legumes',
+    'Divers',
+    'Produits bio',
+    'Epicerie',
+    'Boulangerie',
+    'Lunch',
+  ];
 
- String name = "";
-  bool changeButton = false;
-  bool valuefirst = false;
-  bool valuesecond = false;
+  final List preImage = [
+    'https://app.yummybox.fr/category/1643659597category.png',
+    'https://app.yummybox.fr/category/1646850567category.png',
+    'https://app.yummybox.fr/category/1649248522category.png',
+  ];
 
-
+  final List _preTitle = ['Renee', '0 Marche', 'Denial'];
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-              debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: SingleChildScrollView(
-          child: SafeArea(
-            child: Column(
-              children: [
-                Image.asset(
-                  "assets/test-image.jpeg",
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "LOG IN TO CONTINUE",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.black38,
-                  ),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 20.0),
-                  child: TextFormField(
-                    style: TextStyle(
-                      fontSize: 12,
-                    ),
-                    decoration: const InputDecoration(
-                        enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                          color: Colors.green,
-                        )),
-                        hintText: 'Email',
-                        labelText: 'Email',
-                        iconColor: Colors.white),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "please enter user email";
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 20.0),
-                  child: TextFormField(
-                    style: TextStyle(
-                      fontSize: 12,
-                    ),
-                    decoration: const InputDecoration(
-                        enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                          color: Colors.green,
-                        )),
-                        hintText: ' *******',
-                        labelText: 'Password',
-                        iconColor: Colors.white),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Password is required ?";
-                      } else if (value.length < 8) {
-                        return " validation is required";
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Row(
-                  children: [
-                    Checkbox(
-                      checkColor: Colors.blue,
-                      activeColor: Colors.green,
-                      value: this.valuefirst,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          this.valuefirst = value!;
-                        });
-                      },
-                    ),
-                    Text(
-                      "I accept the term and condition as well as Privacy Policy",
-                      style: TextStyle(
-                        fontSize: 12,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 50.0,
-                      child: RaisedButton(
-                        onPressed: () {},
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(80.0)),
-                        padding: EdgeInsets.all(0.0),
-                        child: Ink(
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  Color.fromARGB(255, 235, 200, 26),
-                                  Color.fromARGB(255, 236, 17, 152)
-                                ],
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+           
+            SizedBox(
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: ClampingScrollPhysics(),
+                itemCount: 5,
+                itemBuilder: (ctx, index) => GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => ProucttDetail()));
+                  },
+                  child: Card(
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Badge(
+                            padding:
+                                EdgeInsets.symmetric(vertical: 4, horizontal: 7),
+                            borderRadius: BorderRadius.circular(4.0),
+                            shape: BadgeShape.square,
+                            badgeColor: Colors.red,
+                            badgeContent: Text(
+                              "0",
+                              style: TextStyle(
+                                color: Colors.white,
                               ),
-                              borderRadius: BorderRadius.circular(30.0)),
-                          child: Container(
-                            constraints: BoxConstraints(
-                                maxWidth: 270.0, minHeight: 50.0),
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Login",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.white),
+                            ),
+                            position: BadgePosition.topStart(
+                              top: 30,
+                            ),
+                            child: Image.network(
+                              "https://app.yummybox.fr/storage/376/firmin---presentation.jpeg",
+                              height: 150,
+                              width: 150,
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Text(
-                        "Forgot your password?",
-                        style: TextStyle(
-                          fontSize: 12,
+                        SizedBox(
+                          width: 30,
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Where ?",
-                      style: TextStyle(
-                        fontSize: 12,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 50.0,
-                      child: RaisedButton(
-                        onPressed: () {
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(80.0)),
-                        padding: EdgeInsets.all(0.0),
-                        child: Ink(
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  Color.fromARGB(255, 235, 200, 26),
-                                  Color.fromARGB(255, 236, 17, 152)
-                                ],
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Les Belles Envies",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
                               ),
-                              borderRadius: BorderRadius.circular(30.0)),
-                          child: Container(
-                            constraints: BoxConstraints(
-                                maxWidth: 270.0, minHeight: 50.0),
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Create an account !",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.white),
                             ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 50.0,
-                      child: RaisedButton(
-                        onPressed: () {
-                         
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(80.0)),
-                        padding: EdgeInsets.all(0.0),
-                        child: Ink(
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  Color.fromARGB(255, 235, 200, 26),
-                                  Color.fromARGB(255, 236, 17, 152)
-                                ],
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
+                            Text(
+                              "Box de 2 patisseries",
+                              style: TextStyle(
+                                fontSize: 8,
+                                color: Colors.red,
                               ),
-                              borderRadius: BorderRadius.circular(30.0)),
-                          child: Container(
-                            constraints: BoxConstraints(
-                                maxWidth: 270.0, minHeight: 50.0),
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Browse as a guest",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.white),
                             ),
-                          ),
+                            Row(
+                              children: [
+                                Image.network(
+                                  "https://app.yummybox.fr/category/1649248522category.png",
+                                  height: 30,
+                                  width: 30,
+                                ),
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.favorite,
+                                    color: Colors.red,
+                                    size: 16,
+                                  ),
+                                ),
+                                Text(
+                                  "289",
+                                  style: TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 8,
+                                  ),
+                                )
+                              ],
+                            ),
+                            Text(
+                              "Panier a 6.00€",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.red,
+                              ),
+                            ),
+                            Text(
+                              "Disponible de 09:30 a 18:00 \n Guadeloupe",
+                              style: TextStyle(
+                                fontSize: 8,
+                                color: Colors.black,
+                              ),
+                            ),
+                            ElevatedButton.icon(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.red,
+                              ),
+                              icon: Icon(
+                                Icons.shopping_cart,
+                                size: 15,
+                                color: Colors.white,
+                              ),
+                              label: Text(
+                                "To Book",
+                                style:
+                                    TextStyle(color: Colors.white, fontSize: 12),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      "assets/nav-image.jpg",
-                      height: 80,
-                      width: 80,
-                    )
-                  ],
-                ),
-              ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
+    );
+  }
+}
 
+class GridItemTitle extends StatelessWidget {
+  final String title;
+  const GridItemTitle({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 5, 5, 0),
+      child: Text(
+        title,
+        textAlign: TextAlign.center,
+      ),
+    );
+  }
+}
+
+class GridItem extends StatelessWidget {
+  final String imageUrl;
+
+  const GridItem({
+    Key? key,
+    required this.imageUrl,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      child: Badge(
+        padding: EdgeInsets.symmetric(vertical: 4, horizontal: 7),
+        borderRadius: BorderRadius.circular(4.0),
+        shape: BadgeShape.square,
+        badgeContent: Text(
+          "0",
+          style: TextStyle(color: Colors.white),
+        ),
+        badgeColor: Colors.black,
+        position: BadgePosition.topEnd(top: -6, end: -6),
+        child: Image.network(
+          imageUrl,
+          height: 50,
+          width: 50,
+        ),
+      ),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
     );
   }
 }
