@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yummy_box/screens/basket.dart';
 import 'package:yummy_box/screens/discover.dart';
+import 'package:yummy_box/screens/map.dart';
 import 'package:yummy_box/screens/reservation.dart';
 import 'package:yummy_box/widgets/drawer.dart';
 
@@ -12,15 +13,19 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  var index = 0;
+
+  var navList = [
+    MyDiscover(),
+    MyMap(),
+    MyBasket(),
+    MyReservation(),
+  ];
+
+
+
   @override
   Widget build(BuildContext context) {
-    var index = 0;
-
-    var navList = [
-     MyDiscover(),
-      MyBasket(),
-      MyReservation(),
-    ];
 
 
     return Scaffold(
@@ -47,18 +52,16 @@ class _SignInState extends State<SignIn> {
         ),
       ),
       endDrawer: MyDrawer(),
-      body: navList[index],
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: index,
         onTap: (value) => setState(() {
           index = value;
           print(index);
         }),
+        currentIndex: index,
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.white,
-        // selectedItemColor: Color.fromARGB(255, 197, 54, 106),
+        selectedItemColor: Color.fromARGB(255, 197, 54, 106),
         unselectedItemColor: Colors.black.withOpacity(.60),
-
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home_filled),
@@ -78,6 +81,8 @@ class _SignInState extends State<SignIn> {
           ),
         ],
       ),
+      body: navList[index],
+
     );
   }
 }

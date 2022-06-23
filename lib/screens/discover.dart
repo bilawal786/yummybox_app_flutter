@@ -44,7 +44,7 @@ class _MyDiscoverState extends State<MyDiscover> {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(13.0),
+            padding: const EdgeInsets.all(6.0),
             child: Column(
               children: [
                 CarouselSlider(
@@ -88,14 +88,14 @@ class _MyDiscoverState extends State<MyDiscover> {
                     ),
                   ],
                   options: CarouselOptions(
-                    height: 180.0,
+                    height: 230.0,
                     enlargeCenterPage: true,
                     autoPlay: true,
                     aspectRatio: 16 / 9,
                     autoPlayCurve: Curves.fastOutSlowIn,
                     enableInfiniteScroll: true,
                     autoPlayAnimationDuration: Duration(milliseconds: 400),
-                    viewportFraction: 0.8,
+                    viewportFraction: 1,
                   ),
                 ),
                 Row(
@@ -187,22 +187,27 @@ class _MyDiscoverState extends State<MyDiscover> {
                             child: Card(
                               child: Row(
                                 children: [
-                                  Badge(
-                                    shape: BadgeShape.square,
-                                    badgeColor: Colors.red,
-                                    badgeContent: Text(
-                                      "0",
-                                      style: TextStyle(
-                                        color: Colors.white,
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Badge(
+                                      padding: EdgeInsets.symmetric(vertical: 4, horizontal: 7),
+                                      borderRadius: BorderRadius.circular(4.0),
+                                      shape: BadgeShape.square,
+                                      badgeColor: Colors.red,
+                                      badgeContent: Text(
+                                        "0",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
                                       ),
-                                    ),
-                                    position: BadgePosition.topStart(
-                                      top: 30,
-                                    ),
-                                    child: Image.network(
-                                      "https://app.yummybox.fr/storage/376/firmin---presentation.jpeg",
-                                      height: 150,
-                                      width: 150,
+                                      position: BadgePosition.topStart(
+                                        top: 30,
+                                      ),
+                                      child: Image.network(
+                                        "https://app.yummybox.fr/storage/376/firmin---presentation.jpeg",
+                                        height: 150,
+                                        width: 150,
+                                      ),
                                     ),
                                   ),
                                   SizedBox(
@@ -286,7 +291,8 @@ class _MyDiscoverState extends State<MyDiscover> {
                                 ],
                               ),
                             ),
-                          )),
+                          ),
+                  ),
                 ),
               ],
             ),
@@ -329,7 +335,8 @@ class GridItem extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       child: Badge(
-        padding: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+        padding: EdgeInsets.symmetric(vertical: 4, horizontal: 7),
+        borderRadius: BorderRadius.circular(4.0),
         shape: BadgeShape.square,
         badgeContent: Text(
           "0",

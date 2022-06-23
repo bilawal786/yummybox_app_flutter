@@ -37,12 +37,13 @@ class _MyRechargeState extends State<MyRecharge> {
             Text(
               "Créditer mon compte",
               style: TextStyle(
-                color: Color.fromARGB(255, 197, 54, 106),
+                color: Colors.black,
               ),
             ),
           ],
         ),
       ),
+
       endDrawer: MyDrawer(),
       body: SingleChildScrollView(
         child: SafeArea(
@@ -54,13 +55,18 @@ class _MyRechargeState extends State<MyRecharge> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.only(top: 5),
                       child: Container(
-                          height: 100,
-                          width: double.infinity,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
                           color: Color.fromARGB(255, 197, 54, 106),
+                        ),
+                          height: 80,
+                          width: double.infinity,
+
                           child: Padding(
                             padding: const EdgeInsets.all(30.0),
+
                             child: Text(
                               "Vous avez actuellement 0 YummyCoin",
                               style: TextStyle(
@@ -70,31 +76,41 @@ class _MyRechargeState extends State<MyRecharge> {
                             ),
                           )),
                     ),
+
                     SizedBox(
-                      height: 30,
+                      height: 15,
                     ),
+
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text("Nombre de YummyCOIN",
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold)),
+                          Text(
+                            "Nombre de YummyCOIN",
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold),
+                          ),
                         ],
                       ),
                     ),
+
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(5.0),
                       child: Container(
                         decoration: BoxDecoration(
-                            border: Border.all(width: 1, color: Colors.black)),
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(width: 1, color: Colors.blueGrey),
+                        ),
                         child: DropdownButton(
-                          hint: Text(
-                            "30000 YummyCOIN",
-                            style: TextStyle(
-                              fontSize: 10,
-                              color: Colors.black,
+                          hint: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Text(
+                              "30000 YummyCoin",
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.black,
+                              ),
                             ),
                           ),
                           value: valueChoose,
@@ -114,9 +130,11 @@ class _MyRechargeState extends State<MyRecharge> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 30,
-                    ),
+
+                   SizedBox(
+                     height: 15,
+                   ),
+
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
@@ -131,16 +149,27 @@ class _MyRechargeState extends State<MyRecharge> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        child: TextFormField(
-                          decoration:
-                              InputDecoration(hintText: "Numero de carte"),
+                      padding: const EdgeInsets.all(5.0),
+                      child: TextFormField(
+                        style: TextStyle(
+                          fontSize: 12,
                         ),
+                        decoration: const InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.blueGrey,
+                                )),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.blueGrey,
+                                )),
+                            hintText: 'Numero de carte',
+                            labelText: '',
+                            iconColor: Colors.white),
                       ),
                     ),
                     SizedBox(
-                      height: 30,
+                      height: 5,
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -155,18 +184,17 @@ class _MyRechargeState extends State<MyRecharge> {
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: 5,
-                    ),
+
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ElevatedButton(
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(
                           primary: Colors.green,
-                          padding: EdgeInsets.all(10.50),
+                          padding: EdgeInsets.all(10.40),
                         ),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               "Recharger mon compte",

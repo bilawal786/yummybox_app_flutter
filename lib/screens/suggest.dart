@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yummy_box/widgets/drawer.dart';
 
 class MySuggest extends StatefulWidget {
   const MySuggest({Key? key}) : super(key: key);
@@ -8,275 +9,400 @@ class MySuggest extends StatefulWidget {
 }
 
 class _MySuggestState extends State<MySuggest> {
-  String name = "";
-  bool changeButton = false;
-  bool valuefirst = false;
-  bool valuesecond = false;
+
+  String? valueChoose;
+  List listItem = [
+    "An app user",
+    "A trade representative",
+  ];
+
+    List _IsList = [
+    "Grocery Store",
+    "A bakery",
+    "Catering",
+    "A restaurant",
+    "A butcher shop",
+    "A scoop",
+    "A supermarket",
+    "Others",
+  ];
+
+    List _DepList = [
+      "Guadeloupe",
+      "Martinique",
+      "Guyana",
+      "The Meeting",
+      "||e-de-France",
+      "Saint-Martin",
+      "Others"
+    ];
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: SingleChildScrollView(
-          child: SafeArea(
+    return Scaffold(
+      appBar:  AppBar(
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: Colors.black),
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(Icons.arrow_back)
+            ),
+
+            SizedBox(
+              width: 30,
+            ),
+            Text(
+              "Suggerer un commerce",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16
+              ),
+            ),
+          ],
+        ),
+      ),
+
+      endDrawer: MyDrawer(),
+
+      body: SingleChildScrollView(
+        child:
+        Card(
+          margin: const EdgeInsets.all(5),
+          elevation: 5,
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
             child: Column(
               children: [
-                Image.asset(
-                  "assets/test-image.jpeg",
+                Container(
+                    width: double.infinity,
+                     padding: const EdgeInsets.only(top: 10, left: 5),
+                    child: Text('Are you?', style: TextStyle(
+                      color: Colors.blueGrey,
+                    ),),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "LOG IN TO CONTINUE",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.black38,
-                  ),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
+
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 20.0),
-                  child: TextFormField(
-                    style: TextStyle(
-                      fontSize: 12,
-                    ),
-                    decoration: const InputDecoration(
-                        enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                          color: Colors.green,
-                        )),
-                        hintText: 'Email',
-                        labelText: 'Email',
-                        iconColor: Colors.white),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "please enter user email";
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 20.0),
-                  child: TextFormField(
-                    style: TextStyle(
-                      fontSize: 12,
-                    ),
-                    decoration: const InputDecoration(
-                        enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                          color: Colors.green,
-                        )),
-                        hintText: ' *******',
-                        labelText: 'Password',
-                        iconColor: Colors.white),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Password is required ?";
-                      } else if (value.length < 8) {
-                        return " validation is required";
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Row(
-                  children: [
-                    Checkbox(
-                      checkColor: Colors.blue,
-                      activeColor: Colors.green,
-                      value: this.valuefirst,
-                      onChanged: (bool? value) {
+                  padding: const EdgeInsets.all(5.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                        border: Border.all(width: 1, color: Colors.blueGrey)),
+                    child: DropdownButton(
+                      hint: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          "An app user",
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      value: valueChoose,
+                      onChanged: (newValue) {
                         setState(() {
-                          this.valuefirst = value!;
+                          valueChoose = newValue as String?;
                         });
                       },
+                      items: listItem.map((valueItem) {
+                        return DropdownMenuItem(
+                          value: valueItem,
+                          child: Text(valueItem),
+                        );
+                      }).toList(),
+                      isExpanded: true,
+                      underline: const SizedBox(),
                     ),
-                    Text(
-                      "I accept the term and condition as well as Privacy Policy",
-                      style: TextStyle(
-                        fontSize: 12,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
+
                 SizedBox(
-                  height: 5,
+                  height: 15,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 50.0,
-                      child: RaisedButton(
-                        onPressed: () {},
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(80.0)),
-                        padding: EdgeInsets.all(0.0),
-                        child: Ink(
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  Color.fromARGB(255, 235, 200, 26),
-                                  Color.fromARGB(255, 236, 17, 152)
-                                ],
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
-                              ),
-                              borderRadius: BorderRadius.circular(30.0)),
-                          child: Container(
-                            constraints: BoxConstraints(
-                                maxWidth: 270.0, minHeight: 50.0),
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Login",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.white),
-                            ),
+
+                Padding(
+                  padding: const EdgeInsets.only(left: 5),
+                  child: Container(
+                    height: 18,
+                      width: double.infinity,
+                      child: Text("What is the name of business?", style: TextStyle(
+                        color: Colors.blueGrey,
+                      ),)
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: TextFormField(
+                    style: TextStyle(
+                      fontSize: 12,
+                    ),
+                    decoration: const InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.blueGrey,
+                            )),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.blueGrey,
+                            )),
+                        hintText: '',
+                        labelText: '',
+                        iconColor: Colors.white),
+                  ),
+                ),
+
+                SizedBox(
+                  height: 15,
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.only(left: 5),
+                  child: Container(
+                    height: 18,
+                    width: double.infinity,
+                    child: Text("Is it?", style: TextStyle(
+                      color: Colors.blueGrey,
+                    ),),
+                  ),
+                ),
+
+
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                        border: Border.all(width: 1, color: Colors.blueGrey)),
+                    child: DropdownButton(
+                      hint: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          "Grocery Store",
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.black,
                           ),
                         ),
                       ),
+                      value: valueChoose,
+                      onChanged: (newValue) {
+                        setState(() {
+                          valueChoose = newValue as String?;
+                        });
+                      },
+                      items: _IsList.map((valueItem) {
+                        return DropdownMenuItem(
+                          value: valueItem,
+                          child: Text(valueItem),
+                        );
+                      }).toList(),
+                      isExpanded: true,
+                      underline: const SizedBox(),
                     ),
-                  ],
+                  ),
                 ),
+
                 SizedBox(
-                  height: 5,
+                  height: 15,
                 ),
+                
+                Padding(
+                  padding: const EdgeInsets.only(left: 5),
+                  child: Container(
+                    height: 18,
+                    width: double.infinity,
+                    child: Text("What department is it is?", style: TextStyle(
+                      color: Colors.blueGrey,
+                    ),),
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                        border: Border.all(width: 1, color: Colors.blueGrey)),
+                    child: DropdownButton(
+                      hint: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          "Guadeloupe",
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      value: valueChoose,
+                      onChanged: (newValue) {
+                        setState(() {
+                          valueChoose = newValue as String?;
+                        });
+                      },
+                      items: _DepList.map((valueItem) {
+                        return DropdownMenuItem(
+                          value: valueItem,
+                          child: Text(valueItem),
+                        );
+                      }).toList(),
+                      isExpanded: true,
+                      underline: const SizedBox(),
+                    ),
+                  ),
+                ),
+
+                SizedBox(
+                  height: 15,
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.only(left: 5),
+                  child: Container(
+                      height: 18,
+                      width: double.infinity,
+                      child: Text("What address is the business located at?", style: TextStyle(
+                        color: Colors.blueGrey,
+                      ),)
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: TextFormField(
+                    style: TextStyle(
+                      fontSize: 12,
+                    ),
+                    decoration: const InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.blueGrey,
+                            )),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.blueGrey,
+                            )),
+                        hintText: '',
+                        labelText: '',
+                        iconColor: Colors.white),
+                  ),
+                ),
+
+
+
+                SizedBox(
+                  height: 15,
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.only(left: 5),
+                  child: Container(
+                      height: 18,
+                      width: double.infinity,
+                      child: Text("What is the business phone number?", style: TextStyle(
+                        color: Colors.blueGrey,
+                      ),)
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: TextFormField(
+                    style: TextStyle(
+                      fontSize: 12,
+                    ),
+                    decoration: const InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.blueGrey,
+                            )),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.blueGrey,
+                            )),
+                        hintText: '',
+                        labelText: '',
+                        iconColor: Colors.white),
+                  ),
+                ),
+
+
+
+                SizedBox(
+                  height: 15,
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.only(left: 5),
+                  child: Container(
+                      height: 18,
+                      width: double.infinity,
+                      child: Text("Is there an email to contact a represerntative?", style: TextStyle(
+                        color: Colors.blueGrey,
+                      ),)
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: TextFormField(
+                    style: TextStyle(
+                      fontSize: 12,
+                    ),
+                    decoration: const InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.blueGrey,
+                            )),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.blueGrey,
+                            )),
+                        hintText: '',
+                        labelText: '',
+                        iconColor: Colors.white),
+                  ),
+                ),
+
+               SizedBox(
+                 height: 15,
+               ),
+
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Text(
-                        "Forgot your password?",
-                        style: TextStyle(
-                          fontSize: 12,
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.red,
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Where ?",
-                      style: TextStyle(
-                        fontSize: 12,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 50.0,
-                      child: RaisedButton(
-                        onPressed: () {},
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(80.0)),
-                        padding: EdgeInsets.all(0.0),
-                        child: Ink(
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  Color.fromARGB(255, 235, 200, 26),
-                                  Color.fromARGB(255, 236, 17, 152)
-                                ],
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
-                              ),
-                              borderRadius: BorderRadius.circular(30.0)),
-                          child: Container(
-                            constraints: BoxConstraints(
-                                maxWidth: 270.0, minHeight: 50.0),
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Create an account !",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.white),
-                            ),
+                        onPressed: (){},
+                          child: Text(
+                            "Send", style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
                           ),
-                        ),
-                      ),
+                          ),),
                     ),
                   ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 50.0,
-                      child: RaisedButton(
-                        onPressed: () {},
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(80.0)),
-                        padding: EdgeInsets.all(0.0),
-                        child: Ink(
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  Color.fromARGB(255, 235, 200, 26),
-                                  Color.fromARGB(255, 236, 17, 152)
-                                ],
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
-                              ),
-                              borderRadius: BorderRadius.circular(30.0)),
-                          child: Container(
-                            constraints: BoxConstraints(
-                                maxWidth: 270.0, minHeight: 50.0),
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Browse as a guest",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      "assets/nav-image.jpg",
-                      height: 80,
-                      width: 80,
-                    )
-                  ],
-                ),
+                )
+
               ],
             ),
           ),
         ),
+
       ),
+
+
     );
+
   }
 }
