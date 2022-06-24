@@ -44,7 +44,7 @@ class _MyDiscoverState extends State<MyDiscover> {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(6.0),
+            padding: const EdgeInsets.all(0.0),
             child: Column(
               children: [
                 CarouselSlider(
@@ -98,16 +98,20 @@ class _MyDiscoverState extends State<MyDiscover> {
                     viewportFraction: 1,
                   ),
                 ),
-                Row(
-                  children: [
-                    Text(
-                      "Our Categories",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    )
-                  ],
+
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Our Categories",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
                 SizedBox(
                   height: 5,
@@ -135,19 +139,24 @@ class _MyDiscoverState extends State<MyDiscover> {
                         );
                       }),
                 ),
+
                 SizedBox(
                   height: 30,
                 ),
-                Row(
-                  children: [
-                    Text(
-                      "Premium",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    )
-                  ],
+
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Premium",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
                 Container(
                   child: GridView.builder(
@@ -211,7 +220,7 @@ class _MyDiscoverState extends State<MyDiscover> {
                                     ),
                                   ),
                                   SizedBox(
-                                    width: 30,
+                                    width: 50,
                                   ),
                                   Column(
                                     crossAxisAlignment:
@@ -264,7 +273,7 @@ class _MyDiscoverState extends State<MyDiscover> {
                                         ),
                                       ),
                                       Text(
-                                        "Disponible de 09:30 a 18:00 \n Guadeloupe",
+                                        "Disponible de 09:30 a 18:00\nGuadeloupe",
                                         style: TextStyle(
                                           fontSize: 8,
                                           color: Colors.black,

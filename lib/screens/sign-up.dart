@@ -33,115 +33,111 @@ class _SignUpState extends State<SignUp> {
                 SizedBox(
                   height: 10,
                 ),
+
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                    vertical: 10.0,
-                    horizontal: 50.0,
-                  ),
+                      vertical: 10.0, horizontal: 20.0),
                   child: TextFormField(
-                    initialValue: "John",
-                    cursorColor: Colors.black38,
                     style: TextStyle(
                       fontSize: 12,
                     ),
                     decoration: const InputDecoration(
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                        color: Colors.green,
-                      )),
-                      labelText: 'First name',
-                      // hintText: 'John',
-                    ),
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.green,
+                            )),
+                        hintText: 'John',
+                        labelText: 'First Name*',
+                        iconColor: Colors.white),
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "Prenom required";
+                        return "please enter user name";
                       }
                       return null;
                     },
                   ),
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+
+
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                    vertical: 10.0,
-                    horizontal: 50.0,
-                  ),
+                      vertical: 10.0, horizontal: 20.0),
                   child: TextFormField(
-                    initialValue: "Doe",
                     style: TextStyle(
                       fontSize: 12,
                     ),
                     decoration: const InputDecoration(
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                        color: Colors.green,
-                      )),
-                      labelText: 'Last name',
-                      // hintText: 'Doe',
-                    ),
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.green,
+                            )),
+                        hintText: 'Doe',
+                        labelText: 'Last Name*',
+                        iconColor: Colors.white),
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "Nom required";
+                        return "please enter user name";
                       }
                       return null;
                     },
                   ),
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+
+
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                    vertical: 10.0,
-                    horizontal: 50.0,
-                  ),
+                      vertical: 10.0, horizontal: 20.0),
                   child: TextFormField(
-                    initialValue: "johndoe@example.com",
                     style: TextStyle(
                       fontSize: 12,
                     ),
                     decoration: const InputDecoration(
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                        color: Colors.green,
-                      )),
-                      labelText: 'Email',
-                      // hintText: 'johndoe@example.com',
-                    ),
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.green,
+                            )),
+                        hintText: 'Johndoe@example.com',
+                        labelText: 'Email',
+                        iconColor: Colors.white),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "please enter user email";
+                      }
+                      return null;
+                    },
                   ),
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                    vertical: 10.0,
-                    horizontal: 50.0,
-                  ),
+                      vertical: 10.0, horizontal: 20.0),
                   child: TextFormField(
-                    initialValue: "06 90 12 34 56",
                     style: TextStyle(
                       fontSize: 12,
                     ),
                     decoration: const InputDecoration(
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                        color: Colors.green,
-                      )),
-                      labelText: 'Phone number',
-                      // hintText: '0690123456',
-                    ),
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.green,
+                            )),
+                        hintText: '06 90 12 34 56',
+                        labelText: 'Phone Number',
+                        iconColor: Colors.white),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "please enter user phone number";
+                      }
+                      return null;
+                    },
                   ),
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+
+
+
                 Container(
                   width: 400,
                   padding:
-                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
+                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -176,83 +172,84 @@ class _SignUpState extends State<SignUp> {
                     ],
                   ),
                 ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   children: [
 
-                //   ],
-                // ),
+
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                    vertical: 10.0,
-                    horizontal: 50.0,
-                  ),
+                      vertical: 10.0, horizontal: 20.0),
                   child: TextFormField(
-                    initialValue: "Forgot your password",
                     style: TextStyle(
                       fontSize: 12,
                     ),
                     decoration: const InputDecoration(
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                        color: Colors.green,
-                      )),
-                      labelText: 'Forgot your password',
-                      // hintText: 'Mot de passe',
-                    ),
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.green,
+                            )),
+                        hintText: 'Forgot your password',
+                        labelText: 'Forgot your password',
+                        iconColor: Colors.white),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "please enter user password";
+                      }
+                      return null;
+                    },
                   ),
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                    vertical: 10.0,
-                    horizontal: 50.0,
-                  ),
+                      vertical: 10.0, horizontal: 20.0),
                   child: TextFormField(
-                    initialValue: "Password Confirmation",
                     style: TextStyle(
                       fontSize: 12,
                     ),
                     decoration: const InputDecoration(
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                        color: Colors.green,
-                      )),
-                      labelText: 'Password Confirmation',
-                      // hintText: 'confirmation du mot the passe',
-                    ),
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.green,
+                            )),
+                        hintText: 'Password confirmation',
+                        labelText: 'Password Confirmation',
+                        iconColor: Colors.white),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "please confirm user password";
+                      }
+                      return null;
+                    },
                   ),
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+
+
+
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                    vertical: 10.0,
-                    horizontal: 50.0,
-                  ),
+                      vertical: 10.0, horizontal: 20.0),
                   child: TextFormField(
-                    initialValue: "Referral code (optional)",
                     style: TextStyle(
                       fontSize: 12,
                     ),
                     decoration: const InputDecoration(
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                        color: Colors.green,
-                      )),
-                      labelText: 'Referral code (optional)',
-                      // hintText: 'Code de parrainage (facultatif)',
-                    ),
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.green,
+                            )),
+                        hintText: 'Referral code (optional)',
+                        labelText: 'Referral code (optional)',
+                        iconColor: Colors.white),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "please enter user code";
+                      }
+                      return null;
+                    },
                   ),
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Checkbox(
                       checkColor: Colors.blue,
@@ -265,7 +262,7 @@ class _SignUpState extends State<SignUp> {
                       },
                     ),
                     Text(
-                      "I accept the term and condition as well as Privacy Policy",
+                      "I accept the term and condition as well as \nPrivacy Policy",
                       style: TextStyle(
                         fontSize: 12,
                       ),

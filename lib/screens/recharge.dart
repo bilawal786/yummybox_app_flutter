@@ -21,26 +21,29 @@ class _MyRechargeState extends State<MyRecharge> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
-        title: Row(
-          children: [
-            IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: Icon(Icons.arrow_back)),
-            SizedBox(
-              width: 18,
-            ),
-            Text(
-              "Créditer mon compte",
-              style: TextStyle(
-                color: Colors.black,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(45),
+        child: AppBar(
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.black),
+          title: Row(
+            children: [
+              IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(Icons.arrow_back)),
+              SizedBox(
+                width: 18,
               ),
-            ),
-          ],
+              Text(
+                "Créditer mon compte",
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
 
@@ -127,13 +130,11 @@ class _MyRechargeState extends State<MyRecharge> {
                           }).toList(),
                           isExpanded: true,
                           underline: const SizedBox(),
+                          isDense: true,
                         ),
                       ),
                     ),
 
-                   SizedBox(
-                     height: 15,
-                   ),
 
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -155,6 +156,7 @@ class _MyRechargeState extends State<MyRecharge> {
                           fontSize: 12,
                         ),
                         decoration: const InputDecoration(
+                          isDense: true,
                             enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: Colors.blueGrey,

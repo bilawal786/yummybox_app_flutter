@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yummy_box/screens/basket.dart';
+import 'package:yummy_box/screens/Favourite.dart';
 import 'package:yummy_box/screens/discover.dart';
 import 'package:yummy_box/screens/map.dart';
 import 'package:yummy_box/screens/reservation.dart';
@@ -18,7 +18,7 @@ class _SignInState extends State<SignIn> {
   var navList = [
     MyDiscover(),
     MyMap(),
-    MyBasket(),
+    MyFavourite(),
     MyReservation(),
   ];
 
@@ -29,26 +29,30 @@ class _SignInState extends State<SignIn> {
 
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
-        title: Row(
-          children: [
-            SizedBox(
-              width: 40,
-              height: 40,
-              child: Image.asset('assets/logo.jpg'),
-            ),
-            SizedBox(
-              width: 70,
-            ),
-            Text(
-              "Yummy box",
-              style: TextStyle(
-                color: Color.fromARGB(255, 197, 54, 106),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(45.0),
+        child: AppBar(
+
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.black),
+          title: Row(
+            children: [
+              SizedBox(
+                width: 30,
+                height: 30,
+                child: Image.asset('assets/logo.jpg'),
               ),
-            ),
-          ],
+              SizedBox(
+                width: 70,
+              ),
+              Text(
+                "Yummy box",
+                style: TextStyle(
+                  color: Color.fromARGB(255, 197, 54, 106),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
       endDrawer: MyDrawer(),
@@ -73,7 +77,7 @@ class _SignInState extends State<SignIn> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
-            label: 'Basket',
+            label: 'Favourite',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.book),

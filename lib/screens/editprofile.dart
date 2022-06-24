@@ -169,7 +169,7 @@ class _EditProfileState extends State<EditProfile> {
                              borderSide: BorderSide(
                                color: Colors.blueGrey,
                              )),
-                         hintText: '',
+                         hintText: 'Prenom',
                          labelText: '',
                           ),
                    ),
@@ -221,7 +221,7 @@ class _EditProfileState extends State<EditProfile> {
                            borderSide: BorderSide(
                              color: Colors.blueGrey,
                            )),
-                       hintText: '',
+                       hintText: 'Nom',
                        labelText: '',
                      ),
                    ),
@@ -275,7 +275,7 @@ class _EditProfileState extends State<EditProfile> {
                            borderSide: BorderSide(
                              color: Colors.blueGrey,
                            )),
-                       hintText: '',
+                       hintText: 'Telephone',
                        labelText: '',
                      ),
                    ),
@@ -324,7 +324,7 @@ class _EditProfileState extends State<EditProfile> {
                            borderSide: BorderSide(
                              color: Colors.blueGrey,
                            )),
-                       hintText: '',
+                       hintText: 'Email',
                        labelText: '',
                      ),
                    ),

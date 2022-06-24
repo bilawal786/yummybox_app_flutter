@@ -2,44 +2,56 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:yummy_box/widgets/drawer.dart';
 
-class ProucttDetail extends StatelessWidget {
+class ProucttDetail extends StatefulWidget {
   const ProucttDetail({Key? key}) : super(key: key);
 
   @override
+  State<ProucttDetail> createState() => _ProucttDetailState();
+}
+
+class _ProucttDetailState extends State<ProucttDetail> {
+
+  var check = false;
+
+  @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
-        title: Row(
-          children: [
-            IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: Icon(Icons.arrow_back)),
-            SizedBox(
-              width: 70,
-            ),
-            Text(
-              "Agri-O-Conso",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 18,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(45),
+        child: AppBar(
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.black),
+          title: Row(
+            children: [
+              IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(Icons.arrow_back)),
+              SizedBox(
+                width: 70,
               ),
-            ),
-          ],
+              Text(
+                "Agri-O-Conso",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
       endDrawer: MyDrawer(),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Image.asset("assets/test-image.jpeg"),
-              Card(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image.asset("assets/test-image.jpeg"),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
                 child: Column(
                   children: [
                     Row(
@@ -55,6 +67,7 @@ class ProucttDetail extends StatelessWidget {
                                     padding: EdgeInsets.symmetric(
                                         vertical: 2, horizontal: 5),
                                     shape: BadgeShape.square,
+                                    borderRadius: BorderRadius.circular(3),
                                     badgeContent: Text(
                                       "4",
                                       style: TextStyle(color: Colors.white),
@@ -64,7 +77,7 @@ class ProucttDetail extends StatelessWidget {
                                         BadgePosition.topEnd(top: -6, end: -6),
                                   ),
                                   SizedBox(
-                                    width: 5,
+                                    width: 15,
                                   ),
                                   Text(
                                     "Box legumes fraicheur",
@@ -112,62 +125,78 @@ class ProucttDetail extends StatelessWidget {
                         children: [
                           Icon(Icons.access_alarm_outlined, size: 30, color: Colors.red,),
                           SizedBox(
-                            width: 10,
+                            width: 5,
                           ),
                           Text("Disponsible de 07:00 a 18:00", style: TextStyle(color: Colors.black45),),
                         ],
                       ),
                     ),
 
-                    ListTile(
-                      leading: Icon(Icons.place_outlined, color: Colors.red,),
-                      title: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          "Boulevard du Perou, Les Abymes,Guadloupe",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blueGrey,
-                          ),
+                     Padding(
+                       padding: const EdgeInsets.all(8.0),
+                       child: Row(
+                          // mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(Icons.place_outlined, color: Colors.red,),
+                            Container(
+                              padding: EdgeInsets.only(left: 10),
+                              width: 200,
+                              child: Text(
+                                "Boulevard du Perou, Les Abymes,Guadloupe",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.blueGrey,
+                                ),
+                              ),
+                            ),
+                            Spacer(
+                            ),
+                            Icon(Icons.arrow_forward_ios),
+                          ],
                         ),
-                      ),
-                      trailing: Icon(Icons.arrow_forward_ios),
-                    ),
+                     ),
+
                   ],
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                width: double.infinity,
-                child: Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            "CE QUE VOUS POUVEZ AVOIR",
-                            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text("Panier legumes FRAICHEUR bouquet a soupe banane jaune citron tomates salade courgette christophine carotte  piment vegetaerian.",
-                      style: TextStyle(color: Colors.black45),),
-                    ]),
-                  ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+
+            Container(
+              padding: EdgeInsets.all(8.0),
+              width: double.infinity,
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          "CE QUE VOUS POUVEZ AVOIR",
+                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text("Panier legumes FRAICHEUR bouquet a soupe banane jaune citron tomates salade courgette christophine carotte  piment vegetaerian.",
+                    style: TextStyle(color: Colors.black45),),
+                  ]),
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
-              Card(
+            ),
+            SizedBox(
+              height: 20,
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
                 child: Column(
                   children: [
                     Padding(
@@ -192,7 +221,23 @@ class ProucttDetail extends StatelessWidget {
                               padding: const EdgeInsets.only(
                                   left: 30, right: 30, top: 10, bottom: 5),
                               child:
-                              Icon(Icons.favorite_outline_sharp, size: 40, color: Colors.black,),
+                              IconButton(
+                                onPressed: () {
+                                  setState((){
+                                    check = true;
+                                  });
+                                },
+                                color: Colors.blueGrey,
+                                highlightColor: Colors.amberAccent, //<-- SEE HERE
+                                iconSize: 30,
+                                icon: Icon(
+                                  check == false?
+                                  Icons.favorite_outline_sharp:Icons.favorite,
+                                  color: Colors.red,
+
+
+                                ),
+                              )
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -230,90 +275,64 @@ class ProucttDetail extends StatelessWidget {
                   ],
                 ),
               ),
+            ),
 
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  height: 60,
-                  width: double.infinity,
-                  child: Card(
-                    child: ElevatedButton.icon(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.red,),
+            Container(
+              height: 60,
+              width: double.infinity,
+              child: Card(
+                child: ElevatedButton.icon(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.red,),
 
-                      label: Text(
-                        "Reserver",
-                        style: TextStyle(fontSize: 16, color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      icon: Icon(
-                        Icons.add_chart,
-                        size: 20,
-                        color: Colors.white,
-                      ),
+                  label: Text(
+                    "Reserver",
+                    style: TextStyle(fontSize: 16, color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  icon: Icon(
+                    Icons.add_chart,
+                    size: 20,
+                    color: Colors.white,
+                  ),
 
+                ),
+              ),
+            ),
+
+            SizedBox(
+              height: 10,
+            ),
+
+            Container(
+              padding: EdgeInsets.all(8.0),
+              width: double.infinity,
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          "CE QUE VOUS DEVEZ SAVOIR",
+                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                        ),
+                      ],
                     ),
-                  ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text("Les fruits et legumes frais et de qualites, rien que pour vous",
+                      style: TextStyle(color: Colors.black45),),
+                  ]),
                 ),
               ),
+            ),
 
-              SizedBox(
-                height: 10,
-              ),
-
-              Container(
-                width: double.infinity,
-                child: Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            "CE QUE VOUS DEVEZ SAVOIR",
-                            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text("Les fruits et legumes frais et de qualites, rien que pour vous",
-                        style: TextStyle(color: Colors.black45),),
-                    ]),
-                  ),
-                ),
-              ),
-
-            ],
-          ),
+          ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.white,
-        selectedItemColor: Color.fromARGB(255, 197, 54, 106),
-        unselectedItemColor: Colors.black.withOpacity(.60),
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_filled),
-            label: 'Discover',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.place),
-            label: 'Map',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Basket',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.book),
-            label: 'Reservation',
-          ),
-        ],
       ),
     );
   }

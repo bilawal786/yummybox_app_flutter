@@ -14,30 +14,33 @@ class _MySponsorshipState extends State<MySponsorship> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     appBar:  AppBar(
-       backgroundColor: Colors.white,
-       iconTheme: IconThemeData(color: Colors.black),
-       title: Row(
-         mainAxisSize: MainAxisSize.min,
-         children: [
-           IconButton(
-               onPressed: () {
-                 Navigator.pop(context);
-               },
-               icon: Icon(Icons.arrow_back)
-           ),
-
-           SizedBox(
-             width: 70,
-           ),
-           Text(
-             "Parrainage",
-             style: TextStyle(
-                 color: Colors.black,
-                 fontSize: 16
+     appBar:  PreferredSize(
+       preferredSize: Size.fromHeight(45),
+       child: AppBar(
+         backgroundColor: Colors.white,
+         iconTheme: IconThemeData(color: Colors.black),
+         title: Row(
+           mainAxisSize: MainAxisSize.min,
+           children: [
+             IconButton(
+                 onPressed: () {
+                   Navigator.pop(context);
+                 },
+                 icon: Icon(Icons.arrow_back)
              ),
-           ),
-         ],
+
+             SizedBox(
+               width: 70,
+             ),
+             Text(
+               "Parrainage",
+               style: TextStyle(
+                   color: Colors.black,
+                   fontSize: 16
+               ),
+             ),
+           ],
+         ),
        ),
      ),
 

@@ -2,39 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:badges/badges.dart';
 import 'package:yummy_box/screens/productdetail.dart';
 
-class MyBasket extends StatefulWidget {
-  const MyBasket({Key? key}) : super(key: key);
+class MyFavourite extends StatefulWidget {
+  const MyFavourite({Key? key}) : super(key: key);
 
   @override
-  State<MyBasket> createState() => _MyBasketState();
+  State<MyFavourite> createState() => _MyFavouriteState();
 }
 
-class _MyBasketState extends State<MyBasket> {
-  final List imageUrl = [
-    'https://app.yummybox.fr/storage/331/Fruits.png',
-    'https://app.yummybox.fr/storage/330/Divers.png',
-    'https://app.yummybox.fr/storage/329/Produits-Bio.png',
-    'https://app.yummybox.fr/storage/328/Epicerie.png',
-    'https://app.yummybox.fr/storage/327/Boulangerie.png',
-    'https://app.yummybox.fr/storage/326/Lunch.png',
-  ];
+class _MyFavouriteState extends State<MyFavourite> {
 
-  final List _gridItemTitle = [
-    'Fruits/legumes',
-    'Divers',
-    'Produits bio',
-    'Epicerie',
-    'Boulangerie',
-    'Lunch',
-  ];
-
-  final List preImage = [
-    'https://app.yummybox.fr/category/1643659597category.png',
-    'https://app.yummybox.fr/category/1646850567category.png',
-    'https://app.yummybox.fr/category/1649248522category.png',
-  ];
-
-  final List _preTitle = ['Renee', '0 Marche', 'Denial'];
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +57,7 @@ class _MyBasketState extends State<MyBasket> {
                           ),
                         ),
                         SizedBox(
-                          width: 30,
+                          width: 40,
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,7 +109,7 @@ class _MyBasketState extends State<MyBasket> {
                               ),
                             ),
                             Text(
-                              "Disponible de 09:30 a 18:00 \n Guadeloupe",
+                              "Disponible de 09:30 a 18:00\nGuadeloupe",
                               style: TextStyle(
                                 fontSize: 8,
                                 color: Colors.black,
@@ -170,54 +146,6 @@ class _MyBasketState extends State<MyBasket> {
   }
 }
 
-class GridItemTitle extends StatelessWidget {
-  final String title;
-  const GridItemTitle({
-    Key? key,
-    required this.title,
-  }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 5, 5, 0),
-      child: Text(
-        title,
-        textAlign: TextAlign.center,
-      ),
-    );
-  }
-}
 
-class GridItem extends StatelessWidget {
-  final String imageUrl;
 
-  const GridItem({
-    Key? key,
-    required this.imageUrl,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      child: Badge(
-        padding: EdgeInsets.symmetric(vertical: 4, horizontal: 7),
-        borderRadius: BorderRadius.circular(4.0),
-        shape: BadgeShape.square,
-        badgeContent: Text(
-          "0",
-          style: TextStyle(color: Colors.white),
-        ),
-        badgeColor: Colors.black,
-        position: BadgePosition.topEnd(top: -6, end: -6),
-        child: Image.network(
-          imageUrl,
-          height: 50,
-          width: 50,
-        ),
-      ),
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
-    );
-  }
-}

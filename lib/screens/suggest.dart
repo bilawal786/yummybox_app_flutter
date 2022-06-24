@@ -40,30 +40,33 @@ class _MySuggestState extends State<MySuggest> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  AppBar(
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
-        title: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: Icon(Icons.arrow_back)
-            ),
-
-            SizedBox(
-              width: 30,
-            ),
-            Text(
-              "Suggerer un commerce",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 16
+      appBar:  PreferredSize(
+        preferredSize: Size.fromHeight(45),
+        child: AppBar(
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.black),
+          title: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(Icons.arrow_back)
               ),
-            ),
-          ],
+
+              SizedBox(
+                width: 30,
+              ),
+              Text(
+                "Suggerer un commerce",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16
+                ),
+              ),
+            ],
+          ),
         ),
       ),
 
@@ -117,6 +120,7 @@ class _MySuggestState extends State<MySuggest> {
                       }).toList(),
                       isExpanded: true,
                       underline: const SizedBox(),
+
                     ),
                   ),
                 ),
@@ -143,17 +147,19 @@ class _MySuggestState extends State<MySuggest> {
                       fontSize: 12,
                     ),
                     decoration: const InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.blueGrey,
-                            )),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.blueGrey,
-                            )),
-                        hintText: '',
-                        labelText: '',
-                        iconColor: Colors.white),
+                      isDense: true,
+                      contentPadding: EdgeInsets.all(12),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.blueGrey,
+                          )),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.blueGrey,
+                          )),
+                      hintText: 'Shops etc',
+                      labelText: '',
+                    ),
                   ),
                 ),
 
@@ -280,20 +286,21 @@ class _MySuggestState extends State<MySuggest> {
                       fontSize: 12,
                     ),
                     decoration: const InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.blueGrey,
-                            )),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.blueGrey,
-                            )),
-                        hintText: '',
-                        labelText: '',
-                        iconColor: Colors.white),
+                      isDense: true,
+                      contentPadding: EdgeInsets.all(12),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.blueGrey,
+                          )),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.blueGrey,
+                          )),
+                      hintText: 'Guadeloupe etc',
+                      labelText: '',
+                    ),
                   ),
                 ),
-
 
 
                 SizedBox(
@@ -318,17 +325,19 @@ class _MySuggestState extends State<MySuggest> {
                       fontSize: 12,
                     ),
                     decoration: const InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.blueGrey,
-                            )),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.blueGrey,
-                            )),
-                        hintText: '',
-                        labelText: '',
-                        iconColor: Colors.white),
+                      isDense: true,
+                      contentPadding: EdgeInsets.all(12),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.blueGrey,
+                          )),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.blueGrey,
+                          )),
+                      hintText: '0xxxxxxxxx',
+                      labelText: '',
+                    ),
                   ),
                 ),
 
@@ -356,17 +365,19 @@ class _MySuggestState extends State<MySuggest> {
                       fontSize: 12,
                     ),
                     decoration: const InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.blueGrey,
-                            )),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.blueGrey,
-                            )),
-                        hintText: '',
-                        labelText: '',
-                        iconColor: Colors.white),
+                      isDense: true,
+                      contentPadding: EdgeInsets.all(12),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.blueGrey,
+                          )),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.blueGrey,
+                          )),
+                      hintText: 'xyz@.com',
+                      labelText: '',
+                    ),
                   ),
                 ),
 

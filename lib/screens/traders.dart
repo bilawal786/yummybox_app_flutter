@@ -40,26 +40,29 @@ class _MyTradersState extends State<MyTraders> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
-        title: Row(
-          children: [
-            IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: Icon(Icons.arrow_back)),
-            SizedBox(
-              width: 30,
-            ),
-            Text(
-              "Nos commercants",
-              style: TextStyle(
-                color: Colors.black,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(45),
+        child: AppBar(
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.black),
+          title: Row(
+            children: [
+              IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(Icons.arrow_back)),
+              SizedBox(
+                width: 30,
               ),
-            ),
-          ],
+              Text(
+                "Nos commercants",
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
       endDrawer: MyDrawer(),

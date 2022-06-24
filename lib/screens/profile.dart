@@ -22,28 +22,31 @@ class _MyProfileState extends State<MyProfile> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          iconTheme: IconThemeData(color: Colors.black),
-          title: Row(
-            children: [
-              IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(Icons.arrow_back)
-                  ),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(45),
+          child: AppBar(
+            backgroundColor: Colors.white,
+            iconTheme: IconThemeData(color: Colors.black),
+            title: Row(
+              children: [
+                IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(Icons.arrow_back)
+                    ),
 
-              SizedBox(
-                width: 70,
-              ),
-              Text(
-                "My Profile",
-                style: TextStyle(
-                  color: Colors.black,
+                SizedBox(
+                  width: 70,
                 ),
-              ),
-            ],
+                Text(
+                  "My Profile",
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         endDrawer: MyDrawer(),
@@ -95,7 +98,7 @@ class _MyProfileState extends State<MyProfile> {
                     ),
                     trailing: Icon(Icons.arrow_forward_ios),
                     onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => SignIn(),
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => MyReservation(),
                       ),
                       );
                     },
