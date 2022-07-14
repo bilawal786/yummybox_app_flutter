@@ -1,7 +1,11 @@
 import 'package:badges/badges.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:yummy_box/provider/category_provider.dart';
 import 'package:yummy_box/screens/productdetail.dart';
+
+import '../provider/banner_provider.dart';
+import 'package:provider/provider.dart';
 
 class MyDiscover extends StatefulWidget {
   const MyDiscover({Key? key}) : super(key: key);
@@ -11,6 +15,17 @@ class MyDiscover extends StatefulWidget {
 }
 
 class _MyDiscoverState extends State<MyDiscover> {
+  var _isInit = true;
+
+  @override
+  void didChangeDependencies() {
+    if(_isInit){
+      Provider.of<BannerProvider>(context).getBanners();
+      Provider.of<CategoryProvider>(context).getCategories();
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
   final List imageUrl = [
     'https://app.yummybox.fr/storage/331/Fruits.png',
     'https://app.yummybox.fr/storage/330/Divers.png',
@@ -40,6 +55,10 @@ class _MyDiscoverState extends State<MyDiscover> {
 
   @override
   Widget build(BuildContext context) {
+    final bannerData = Provider.of<BannerProvider>(context, listen: false);
+    final banner = bannerData.bannerItems;
+    final categoriesData = Provider.of<CategoryProvider>(context, listen: false);
+    final categories = categoriesData.categoryItems;
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
@@ -47,58 +66,32 @@ class _MyDiscoverState extends State<MyDiscover> {
             padding: const EdgeInsets.all(0.0),
             child: Column(
               children: [
-                CarouselSlider(
-                  items: [
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.symmetric(vertical: 10.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.0),
-                        image: DecorationImage(
-                          image: NetworkImage(
-                              "https://app.yummybox.fr/storage/358/ILE-DE-FRANCE.png"),
-                          fit: BoxFit.cover,
+                banner.length == 0 ? SizedBox(height:200, child: Center(child: CircularProgressIndicator())) : CarouselSlider.builder(
+                  itemCount: banner.length,
+                  itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) =>
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        margin: EdgeInsets.symmetric(vertical: 10.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          image: DecorationImage(
+                            image: NetworkImage(
+                                banner[itemIndex].images),
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
+                    options: CarouselOptions(
+                      height: 230.0,
+                      enlargeCenterPage: true,
+                      autoPlay: true,
+                      aspectRatio: 16 / 9,
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      enableInfiniteScroll: true,
+                      autoPlayAnimationDuration: Duration(milliseconds: 400),
+                      viewportFraction: 1,
                     ),
-                    Container(
-                      width: double.infinity,
-                      margin: EdgeInsets.symmetric(
-                        vertical: 10.0,
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.0),
-                        image: DecorationImage(
-                          image: NetworkImage(
-                              "https://app.yummybox.fr/storage/459/2.png"),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.symmetric(vertical: 10.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.0),
-                        image: DecorationImage(
-                          image: NetworkImage(
-                              "https://app.yummybox.fr/storage/458/3.png"),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ],
-                  options: CarouselOptions(
-                    height: 230.0,
-                    enlargeCenterPage: true,
-                    autoPlay: true,
-                    aspectRatio: 16 / 9,
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    enableInfiniteScroll: true,
-                    autoPlayAnimationDuration: Duration(milliseconds: 400),
-                    viewportFraction: 1,
-                  ),
                 ),
-
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
@@ -116,7 +109,7 @@ class _MyDiscoverState extends State<MyDiscover> {
                 SizedBox(
                   height: 5,
                 ),
-                Container(
+                categories.length == 0 ? SizedBox(height:200, child: Center(child: CircularProgressIndicator())) : Container(
                   child: GridView.builder(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
@@ -127,15 +120,15 @@ class _MyDiscoverState extends State<MyDiscover> {
                         crossAxisSpacing: 5,
                         mainAxisSpacing: 5,
                       ),
-                      itemCount: imageUrl.length,
+                      itemCount: categories.length,
                       itemBuilder: (BuildContext ctx, index) {
                         return Card(
                           child: GridTile(
                               footer: GridItemTitle(
-                                title: _gridItemTitle[index],
+                                title: categories[index].title,
                               ),
                               child: GridItem(
-                                  imageUrl: imageUrl[index].toString())),
+                                  imageUrl: "http://app.yummybox.fr/"+categories[index].image, quantity : categories[index].quantity)),
                         );
                       }),
                 ),
@@ -177,7 +170,7 @@ class _MyDiscoverState extends State<MyDiscover> {
                                 title: _preTitle[index],
                               ),
                               child: GridItem(
-                                  imageUrl: preImage[index].toString())),
+                                  imageUrl: preImage[index].toString(), quantity: 0)),
                         );
                       }),
                 ),
@@ -354,10 +347,11 @@ class GridItemTitle extends StatelessWidget {
 
 class GridItem extends StatelessWidget {
   final String imageUrl;
+  final int quantity;
 
   const GridItem({
     Key? key,
-    required this.imageUrl,
+    required this.imageUrl, required this.quantity,
   }) : super(key: key);
 
   @override
@@ -365,11 +359,11 @@ class GridItem extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       child: Badge(
-        padding: EdgeInsets.symmetric(vertical: 4, horizontal: 7),
+        padding: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
         borderRadius: BorderRadius.circular(4.0),
         shape: BadgeShape.square,
         badgeContent: Text(
-          "0",
+          quantity.toString(),
           style: TextStyle(color: Colors.white),
         ),
         badgeColor: Colors.black,
