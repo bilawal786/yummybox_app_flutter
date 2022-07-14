@@ -14,38 +14,16 @@ class _MySponsorshipState extends State<MySponsorship> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     appBar:  PreferredSize(
-       preferredSize: Size.fromHeight(45),
-       child: AppBar(
-         backgroundColor: Colors.white,
-         iconTheme: IconThemeData(color: Colors.black),
-         title: Row(
-           mainAxisSize: MainAxisSize.min,
-           children: [
-             IconButton(
-                 onPressed: () {
-                   Navigator.pop(context);
-                 },
-                 icon: Icon(Icons.arrow_back)
-             ),
-
-             SizedBox(
-               width: 70,
-             ),
-             Text(
-               "Parrainage",
-               style: TextStyle(
-                   color: Colors.black,
-                   fontSize: 16
-               ),
-             ),
-           ],
-         ),
-       ),
-     ),
-
-      endDrawer: MyDrawer(),
-
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: Text(
+          "Sponsership",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 18,
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Stack(
@@ -96,7 +74,6 @@ class _MySponsorshipState extends State<MySponsorship> {
 
         ),
       ),
-
     );
   }
 }

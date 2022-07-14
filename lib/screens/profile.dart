@@ -22,34 +22,16 @@ class _MyProfileState extends State<MyProfile> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(45),
-          child: AppBar(
-            backgroundColor: Colors.white,
-            iconTheme: IconThemeData(color: Colors.black),
-            title: Row(
-              children: [
-                IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(Icons.arrow_back)
-                    ),
-
-                SizedBox(
-                  width: 70,
-                ),
-                Text(
-                  "My Profile",
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
-              ],
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: Text(
+            "Profile",
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 18,
             ),
           ),
         ),
-        endDrawer: MyDrawer(),
         body: SingleChildScrollView(
           child: SafeArea(
             child: Column(
@@ -154,7 +136,6 @@ class _MyProfileState extends State<MyProfile> {
             ),
           ),
         ),
-
       ),
     );
   }

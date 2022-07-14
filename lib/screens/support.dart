@@ -8,32 +8,16 @@ class MySupport extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(45),
-        child: AppBar(
-          backgroundColor: Colors.white,
-          iconTheme: IconThemeData(color: Colors.black),
-          title: Row(
-            children: [
-              IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(Icons.arrow_back)),
-              SizedBox(
-                width: 90,
-              ),
-              Text(
-                "FAQ",
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-              ),
-            ],
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: Text(
+          "FAQ",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 18,
           ),
         ),
       ),
-      endDrawer: MyDrawer(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),

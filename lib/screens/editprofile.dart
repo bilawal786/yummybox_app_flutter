@@ -23,30 +23,16 @@ class _EditProfileState extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  AppBar(
+      appBar: AppBar(
         backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
-        title: Row(
-          children: [
-            IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: Icon(Icons.arrow_back)),
-            SizedBox(
-              width: 50,
-            ),
-            Text(
-              "Editor mon Profil",
-              style: TextStyle(
-                color: Colors.black,
-              ),
-            ),
-          ],
+        title: Text(
+          "Editor mon Profil",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 18,
+          ),
         ),
       ),
-      endDrawer: MyDrawer(),
-
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(12.0),

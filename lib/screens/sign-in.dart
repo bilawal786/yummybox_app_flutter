@@ -5,6 +5,8 @@ import 'package:yummy_box/screens/map.dart';
 import 'package:yummy_box/screens/reservation.dart';
 import 'package:yummy_box/widgets/drawer.dart';
 
+import '../widgets/appbar.dart';
+
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
 
@@ -14,48 +16,17 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   var index = 0;
-
   var navList = [
     MyDiscover(),
     MyMap(),
     MyFavourite(),
     MyReservation(),
   ];
-
-
-
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(45.0),
-        child: AppBar(
-
-          backgroundColor: Colors.white,
-          iconTheme: IconThemeData(color: Colors.black),
-          title: Row(
-            children: [
-              SizedBox(
-                width: 30,
-                height: 30,
-                child: Image.asset('assets/logo.jpg'),
-              ),
-              SizedBox(
-                width: 70,
-              ),
-              Text(
-                "Yummy box",
-                style: TextStyle(
-                  color: Color.fromARGB(255, 197, 54, 106),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-      endDrawer: MyDrawer(),
+      appBar: PreferredSize( preferredSize: const Size.fromHeight(50), child: MyAppBar()),
+      drawer: MyDrawer(),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (value) => setState(() {
           index = value;
@@ -64,7 +35,7 @@ class _SignInState extends State<SignIn> {
         currentIndex: index,
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.white,
-        selectedItemColor: Color.fromARGB(255, 197, 54, 106),
+        selectedItemColor: Colors.red,
         unselectedItemColor: Colors.black.withOpacity(.60),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(

@@ -17,33 +17,16 @@ class _ProucttDetailState extends State<ProucttDetail> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(45),
-        child: AppBar(
-          backgroundColor: Colors.white,
-          iconTheme: IconThemeData(color: Colors.black),
-          title: Row(
-            children: [
-              IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(Icons.arrow_back)),
-              SizedBox(
-                width: 70,
-              ),
-              Text(
-                "Agri-O-Conso",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                ),
-              ),
-            ],
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: Text(
+          "Agri-O-Conso",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 18,
           ),
         ),
       ),
-      endDrawer: MyDrawer(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

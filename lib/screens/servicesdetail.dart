@@ -9,25 +9,12 @@ class ServiceDetails extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
-        title: Row(
-          children: [
-            IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: Icon(Icons.arrow_back)),
-            SizedBox(
-              width: 15,
-            ),
-            Text(
-              "Condition Generales D'utilisation",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 14
-              ),
-            ),
-          ],
+        title: Text(
+          "Privacy Policy",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 18,
+          ),
         ),
       ),
 

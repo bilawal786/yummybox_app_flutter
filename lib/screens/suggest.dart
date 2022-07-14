@@ -40,38 +40,16 @@ class _MySuggestState extends State<MySuggest> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  PreferredSize(
-        preferredSize: Size.fromHeight(45),
-        child: AppBar(
-          backgroundColor: Colors.white,
-          iconTheme: IconThemeData(color: Colors.black),
-          title: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(Icons.arrow_back)
-              ),
-
-              SizedBox(
-                width: 30,
-              ),
-              Text(
-                "Suggerer un commerce",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16
-                ),
-              ),
-            ],
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: Text(
+          "Suggest a business",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 18,
           ),
         ),
       ),
-
-      endDrawer: MyDrawer(),
-
       body: SingleChildScrollView(
         child:
         Card(

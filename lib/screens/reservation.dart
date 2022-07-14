@@ -29,8 +29,6 @@ class _MyReservationState extends State<MyReservation> {
               SizedBox(
                 height: 10,
               ),
-
-
               SizedBox(
                 child: ListView.builder(
                   shrinkWrap: true,
