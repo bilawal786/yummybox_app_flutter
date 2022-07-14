@@ -276,7 +276,7 @@ class _MyDrawerState extends State<MyDrawer> {
                   ),
                   child: IconButton(onPressed: ( ) => Navigator.pop(context),
 
-                      icon: Icon(Icons.arrow_forward),
+                      icon: Icon(Icons.arrow_back),
                     color: Colors.black,
                   ),
                 ),
