@@ -103,7 +103,7 @@ class _MyReservationState extends State<MyReservation> {
                                       child: ElevatedButton(
                                         onPressed: (){},
                                         child: Text("Recupere", style: TextStyle(
-                                          fontSize: 8,
+                                          fontSize: 10,
                                           fontWeight: FontWeight.bold,
                                         ),),
                                         style: ElevatedButton.styleFrom(
