@@ -42,20 +42,24 @@ class _MyReservationState extends State<MyReservation> {
                     child: Card(
                       child: Row(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
+                          Expanded(
                             child: Padding(
-                              padding: const EdgeInsets.only(left: 15),
-                              child: Image.network(
-                                "https://app.yummybox.fr/storage/371/B6BE44F4-018D-46FE-B95A-7F488E182B19.jpeg",
-                                height: 100,
-                                width: 120,
+                              padding: const EdgeInsets.all(8.0),
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 15),
+                                child: Image.network(
+                                  "https://app.yummybox.fr/storage/376/firmin---presentation.jpeg",
+                                  height: 130,
+                                  width: double.infinity,
+                                ),
                               ),
                             ),
                           ),
                           SizedBox(
                             width: 30,
                           ),
+                          Expanded(
+                              child:
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -96,16 +100,15 @@ class _MyReservationState extends State<MyReservation> {
                                         borderRadius: BorderRadius.circular(8),
                                       ),
                                       height: 20,
-                                      width: 70,
                                       child: ElevatedButton(
                                         onPressed: (){},
                                         child: Text("Recupere", style: TextStyle(
                                           fontSize: 8,
                                           fontWeight: FontWeight.bold,
                                         ),),
-                                      style: ElevatedButton.styleFrom(
-                                        primary: Colors.green,
-                                      ),
+                                        style: ElevatedButton.styleFrom(
+                                          primary: Colors.green,
+                                        ),
                                       ),
                                     ),
                                   )
@@ -114,6 +117,7 @@ class _MyReservationState extends State<MyReservation> {
                               ),
 
                             ],
+                          )
                           ),
                         ],
                       ),

@@ -85,7 +85,6 @@ class MyNotification extends StatelessWidget {
         ),
            ),
       ),
-
     );
   }
 }

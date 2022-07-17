@@ -19,21 +19,21 @@ class MyProfile extends StatefulWidget {
 class _MyProfileState extends State<MyProfile> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: Text(
-            "Profile",
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 18,
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: Text(
+          "Profile",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 18,
           ),
         ),
-        body: SingleChildScrollView(
-          child: SafeArea(
+      ),
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -61,30 +61,12 @@ class _MyProfileState extends State<MyProfile> {
                     Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => EditProfile()));
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.green,
+                    primary: Color.fromARGB(255, 196, 42, 97),
                   ),
                   child: Text("Edit my Profile"),
                 ),
                 SizedBox(
                   height: 30,
-                ),
-                Card(
-                  elevation: 1,
-                  child: ListTile(
-
-                    title: Text(
-                      "My reservations",
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                    trailing: Icon(Icons.arrow_forward_ios),
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => MyReservation(),
-                      ),
-                      );
-                    },
-                  ),
                 ),
                 Card(
                   elevation: 1,

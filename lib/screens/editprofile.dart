@@ -121,7 +121,7 @@ class _EditProfileState extends State<EditProfile> {
                        Container(
                          decoration: BoxDecoration(
                            borderRadius: BorderRadius.circular(5),
-                           color: Colors.green.shade600,
+                           color: Color.fromARGB(255, 196, 42, 97),
                          ),
                            height: 25,
                            width: 25,
@@ -172,7 +172,7 @@ class _EditProfileState extends State<EditProfile> {
                        Container(
                          decoration: BoxDecoration(
                            borderRadius: BorderRadius.circular(5),
-                           color: Colors.green.shade600,
+                           color: Color.fromARGB(255, 196, 42, 97),
                          ),
                            height: 25,
                            width: 25,
@@ -226,7 +226,7 @@ class _EditProfileState extends State<EditProfile> {
                            width: 25,
                          decoration: BoxDecoration(
                            borderRadius: BorderRadius.circular(5),
-                           color: Colors.green.shade600,
+                           color: Color.fromARGB(255, 196, 42, 97),
                          ),
 
 
@@ -279,7 +279,7 @@ class _EditProfileState extends State<EditProfile> {
                            width: 25,
                            decoration: BoxDecoration(
                              borderRadius: BorderRadius.circular(5),
-                             color: Colors.green.shade600,
+                             color: Color.fromARGB(255, 196, 42, 97),
                            ),
                            child: Icon(Icons.email_outlined, color: Colors.white,)),
                        SizedBox(
@@ -329,7 +329,7 @@ class _EditProfileState extends State<EditProfile> {
                            width: 25,
                            decoration: BoxDecoration(
                              borderRadius: BorderRadius.circular(5),
-                             color: Colors.green.shade600,
+                             color: Color.fromARGB(255, 196, 42, 97),
                            ),
 
                            child: Icon(Icons.email_outlined, color: Colors.white,)),
@@ -391,7 +391,7 @@ class _EditProfileState extends State<EditProfile> {
 
                      },
                      style: ElevatedButton.styleFrom(
-                       primary: Colors.green,
+                       primary: Color.fromARGB(255, 196, 42, 97),
                        padding: EdgeInsets.all(10.40),
                      ),
                      child: Row(
