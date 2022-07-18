@@ -1,149 +1,236 @@
-// import 'dart:async';
-//
-// import 'package:flutter/material.dart';
-// import 'package:geolocator/geolocator.dart';
-// import 'package:google_maps_flutter/google_maps_flutter.dart';
-//
-//
-// class MyMap extends StatefulWidget {
-//   @override
-//   _MyAppState createState() => _MyAppState();
-// }
-//
-// class _MyAppState extends State<MyMap> {
-//
-//
-//   Completer<GoogleMapController> _controller = Completer();
-//
-//   static final CameraPosition _kGooglePlex = CameraPosition(
-//     target: LatLng(37.42796133580664, -122.085749655962),
-//     zoom: 14.4746,
-//   );
-//
-//   static final CameraPosition _kLake = CameraPosition(
-//       bearing: 192.8334901395799,
-//       target: LatLng(37.43296265331129, -122.08832357078792),
-//       tilt: 59.440717697143555,
-//       zoom: 19.151926040649414);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return new Scaffold(
-//       body: GoogleMap(
-//         mapType: MapType.normal,
-//         initialCameraPosition: _kGooglePlex,
-//         onMapCreated: (GoogleMapController controller) {
-//           _controller.complete(controller);
-//         },
-//       ),
-//       floatingActionButton: FloatingActionButton.extended(
-//         onPressed: _goToTheLake,
-//         label: Text('To the location!'),
-//         icon: Icon(Icons.location),
-//       ),
-//     );
-//   }
-//
-//   Future<void> _goToTheLake() async {
-//     final GoogleMapController controller = await _controller.future;
-//     controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
-//   }
-// }
 
-import 'dart:async';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
+import 'package:custom_info_window/custom_info_window.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:geolocator/geolocator.dart';
+
 
 class MyMap extends StatefulWidget {
+
+
   @override
-  State<MyMap> createState() => MyMapState();
+  State<MyMap> createState() => _MyMapState();
 }
 
-class MyMapState extends State<MyMap> {
-  LatLng initPosition = LatLng(0, 0); //initial Position cannot assign null values
-  LatLng currentLatLng= LatLng(0.0, 0.0); //initial currentPosition values cannot assign null values
-  LocationPermission permission = LocationPermission.denied; //initial permission status
-  Completer<GoogleMapController> _controller = Completer();
+class _MyMapState extends State<MyMap> {
+  CustomInfoWindowController _customInfoWindowController =
+  CustomInfoWindowController();
+
+  final LatLng _latLng = LatLng(33.6844, 73.0479);
+
+  final double _zoom = 15.0;
+
+  Set<Marker> _markers = {};
+
+  List<String> images = [ 'assets/logo-new.png' , 'assets/logo-new.png' ,];
+
+  Uint8List? markerImage;
+
+  Future<Uint8List> getBytesFromAsset(String path, int width) async {
+    ByteData data = await rootBundle.load(path);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
+
+  }
+
+  @override
+  void dispose() {
+    _customInfoWindowController.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
-    getCurrentLocation();
-    checkPermission();
+    loadData() ;
+
   }
 
-  //checkPersion before initialize the map
-  void checkPermission() async{
-    permission = await Geolocator.checkPermission();
-  }
+  //Set<Marker> _markers = {};
+  loadData()async{
 
-  // get current location
-  void getCurrentLocation() async{
-    await Geolocator.getCurrentPosition().then((currLocation) {
+    for(int i = 0 ; i < images.length ; i++){
+      print('name'+images[i].toString());
+      final Uint8List markerIcon = await getBytesFromAsset(images[i].toString(), 100);
+
+      if(i == 1 ){
+        _markers.add(Marker(
+            markerId: MarkerId('2'),
+            position: LatLng(33.6992,  72.9744),
+            icon: BitmapDescriptor.fromBytes(markerIcon),
+            onTap: () {
+              _customInfoWindowController.addInfoWindow!(
+                Column(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        width: 300,
+                        height: 150,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Container(
+                                  width: double.infinity,
+                                  child: Image.asset("assets/logo-new.png", fit: BoxFit.cover,)),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10 , left: 10 , right: 10),
+                              child: Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 100,
+                                      child: Text(
+                                        'Yummy Box',
+                                        maxLines: 1,
+                                        overflow: TextOverflow.fade,
+                                        softWrap: false,
+                                      ),
+                                    ),
+                                    const Spacer(),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 5),
+                                      child: Container(
+                                        height: 30,
+                                        width: 30,
+                                        child: Image.asset("assets/logo-new.png"),
+                                      ),
+                                    ),
+                                  ]
+                              ),
+                            ),
+
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                LatLng(33.6992,  72.9744),
+              );
+            }
+        ));
+      }else {
+        _markers.add( Marker(
+            markerId: MarkerId(i.toString()),
+            position: LatLng(33.6844, 73.0479),
+            icon: BitmapDescriptor.fromBytes(markerIcon),
+            onTap: () {
+              _customInfoWindowController.addInfoWindow!(
+                Container(
+                  width: 300,
+                  height: 150,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Container(
+                            width: double.infinity,
+                            child: Image.asset("assets/logo-new.png", fit: BoxFit.cover,)),
+                      ),
+                      // Container(
+                      //   width: 200,
+                      //   height: 100,
+                      //   decoration: BoxDecoration(
+                      //     image: DecorationImage(
+                      //         image: AssetImage(images[1]),
+                      //         fit: BoxFit.fitWidth,
+                      //         filterQuality: FilterQuality.high),
+                      //     borderRadius: const BorderRadius.all(
+                      //       Radius.circular(10.0),
+                      //     ),
+                      //   ),
+                      // ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10 , left: 10 , right: 10),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 100,
+                              child: Text(
+                                'Yummy Box',
+                                maxLines: 1,
+                                overflow: TextOverflow.fade,
+                                softWrap: false,
+                              ),
+                            ),
+                            const Spacer(),
+                           Padding(
+                             padding: const EdgeInsets.only(bottom: 5),
+                             child: Container(
+                               height: 30,
+                               width: 30,
+                               child: Image.asset("assets/logo-new.png"),
+                             ),
+                           ),
+                          ]
+                        ),
+                      ),
+
+                    ],
+                  ),
+                ),
+                LatLng(33.6844, 73.0479),
+              );
+            }
+        ));
+      }
+
       setState(() {
-        currentLatLng =
-        new LatLng(currLocation.latitude, currLocation.longitude);
+
       });
-    });
-  }
-
-  //call this onPress floating action button
-  void _currentLocation() async {
-    final GoogleMapController controller = await _controller.future;
-    getCurrentLocation();
-    controller.animateCamera(CameraUpdate.newCameraPosition(
-      CameraPosition(
-        bearing: 0,
-        target: currentLatLng,
-        zoom: 18.0,
-      ),
-    ));
-  }
-
-  //Check permission status and currentPosition before render the map
-  bool checkReady(LatLng? x, LocationPermission? y) {
-    if (x == initPosition || y == LocationPermission.denied || y == LocationPermission.deniedForever) {
-      return true;
-    } else {
-      return false;
     }
+
+
+
   }
 
   @override
   Widget build(BuildContext context) {
-    print(permission);
-    print("Current Location --------> " +
-        currentLatLng.latitude.toString() +
-        " " +
-        currentLatLng.longitude.toString());
+    // loadData() ;
     return Scaffold(
-      body: checkReady(currentLatLng, permission)
-          ? Center(child: CircularProgressIndicator())
-      //Stack : place floating action button on top of the map
-          : Stack(children: [
-        GoogleMap(
-          myLocationEnabled: true,
-          myLocationButtonEnabled: false,
-          zoomControlsEnabled: false,
-          mapType: MapType.normal,
-          initialCameraPosition: CameraPosition(target: currentLatLng),
-          onMapCreated: (GoogleMapController controller) {
-            _controller.complete(controller);
-          },
-        ),
-        //Positioned : use to place button bottom right corner
-        Positioned(
-          bottom: 0,
-          right: 0,
-          child: Container(
-            margin: EdgeInsets.all(15),
-            child: FloatingActionButton(
-                onPressed: _currentLocation,
-                child: Icon(Icons.location_on)),
+      body: Stack(
+        children: <Widget>[
+          GoogleMap(
+            onTap: (position) {
+              _customInfoWindowController.hideInfoWindow!();
+            },
+            onCameraMove: (position) {
+              _customInfoWindowController.onCameraMove!();
+            },
+            onMapCreated: (GoogleMapController controller) async {
+              _customInfoWindowController.googleMapController = controller;
+            },
+            markers: _markers,
+            initialCameraPosition: CameraPosition(
+              target: _latLng,
+              zoom: _zoom,
+            ),
           ),
-        ),
-      ]),
+          CustomInfoWindow(
+            controller: _customInfoWindowController,
+            height: 200,
+            width: 200,
+            offset: 25,
+          ),
+        ],
+      ),
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:badges/badges.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:yummy_box/provider/category_provider.dart';
+import 'package:yummy_box/provider/pre_provider.dart';
 import 'package:yummy_box/screens/productdetail.dart';
 import 'package:yummy_box/widgets/product.dart';
 
@@ -23,6 +24,7 @@ class _MyDiscoverState extends State<MyDiscover> {
     if(_isInit){
       Provider.of<BannerProvider>(context).getBanners();
       Provider.of<CategoryProvider>(context).getCategories();
+      Provider.of<PreProvider>(context).getPre();
     }
     _isInit = false;
     super.didChangeDependencies();
@@ -60,6 +62,8 @@ class _MyDiscoverState extends State<MyDiscover> {
     final banner = bannerData.bannerItems;
     final categoriesData = Provider.of<CategoryProvider>(context, listen: false);
     final categories = categoriesData.categoryItems;
+    final preData = Provider.of<PreProvider>(context, listen: false);
+    final pre = preData.preItems;
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
@@ -152,6 +156,11 @@ class _MyDiscoverState extends State<MyDiscover> {
                     ],
                   ),
                 ),
+                SizedBox(
+                  height: 10,
+                ),
+
+                categories.length == 0 ? SizedBox(height:200, child: Center(child: CircularProgressIndicator())):
                 Container(
                   child: GridView.builder(
                       shrinkWrap: true,
@@ -163,15 +172,15 @@ class _MyDiscoverState extends State<MyDiscover> {
                         crossAxisSpacing: 5,
                         mainAxisSpacing: 5,
                       ),
-                      itemCount: preImage.length,
+                      itemCount: pre.length,
                       itemBuilder: (BuildContext ctx, index) {
                         return Card(
                           child: GridTile(
                               footer: GridItemTitle(
-                                title: _preTitle[index],
+                                title: pre[index].title,
                               ),
                               child: GridItem(
-                                  imageUrl: preImage[index].toString(), quantity: 0)),
+                                  imageUrl: 'https://app.yummybox.fr/'+pre[index].image, quantity: 0)),
                         );
                       }),
                 ),
