@@ -117,38 +117,33 @@ class MyMapState extends State<MyMap> {
         currentLatLng.latitude.toString() +
         " " +
         currentLatLng.longitude.toString());
-    return MaterialApp(
-      //remove debug banner on top right corner
-      debugShowCheckedModeBanner: false,
-      home: new Scaffold(
-        //ternary operator use for conditional rendering
-        body: checkReady(currentLatLng, permission)
-            ? Center(child: CircularProgressIndicator())
-        //Stack : place floating action button on top of the map
-            : Stack(children: [
-          GoogleMap(
-            myLocationEnabled: true,
-            myLocationButtonEnabled: false,
-            zoomControlsEnabled: false,
-            mapType: MapType.normal,
-            initialCameraPosition: CameraPosition(target: currentLatLng),
-            onMapCreated: (GoogleMapController controller) {
-              _controller.complete(controller);
-            },
+    return Scaffold(
+      body: checkReady(currentLatLng, permission)
+          ? Center(child: CircularProgressIndicator())
+      //Stack : place floating action button on top of the map
+          : Stack(children: [
+        GoogleMap(
+          myLocationEnabled: true,
+          myLocationButtonEnabled: false,
+          zoomControlsEnabled: false,
+          mapType: MapType.normal,
+          initialCameraPosition: CameraPosition(target: currentLatLng),
+          onMapCreated: (GoogleMapController controller) {
+            _controller.complete(controller);
+          },
+        ),
+        //Positioned : use to place button bottom right corner
+        Positioned(
+          bottom: 0,
+          right: 0,
+          child: Container(
+            margin: EdgeInsets.all(15),
+            child: FloatingActionButton(
+                onPressed: _currentLocation,
+                child: Icon(Icons.location_on)),
           ),
-          //Positioned : use to place button bottom right corner
-          Positioned(
-            bottom: 0,
-            right: 0,
-            child: Container(
-              margin: EdgeInsets.all(15),
-              child: FloatingActionButton(
-                  onPressed: _currentLocation,
-                  child: Icon(Icons.location_on)),
-            ),
-          ),
-        ]),
-      ),
+        ),
+      ]),
     );
   }
 }
