@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:yummy_box/provider/banner_provider.dart';
 import 'package:yummy_box/provider/category_provider.dart';
 import 'package:yummy_box/provider/pre_provider.dart';
+import 'package:yummy_box/screens/intro_screen.dart';
 import 'package:yummy_box/screens/login.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
         ],
         debugShowCheckedModeBanner: false,
         routes: {
-          "/": (context) => Login(),
+          "/": (context) => IntroScreen(),
         },
       ),
     );
