@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         theme: ThemeData(
           primarySwatch: Colors.pink,
-          appBarTheme: AppBarTheme( // <-- SEE HERE
+          appBarTheme: AppBarTheme(
             iconTheme: IconThemeData(color: Colors.black),
           ),
         ),

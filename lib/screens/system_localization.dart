@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
-
-import '../main.dart';
 import '../provider/local_provider.dart';
-import '../widgets/language _picker.dart';
 
 class LocalizationSystemPage extends StatefulWidget {
   @override
@@ -33,7 +30,6 @@ class _LocalizationSystemPageState extends State<LocalizationSystemPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          LanguageWidget(),
           const SizedBox(height: 32),
           Text(
             AppLocalizations.of(context)!.language,

@@ -1,5 +1,5 @@
 {
   "language": "Español",
   "helloWorld": "Hola Mundo!",
-  "hello": "Hola {username}"
+  "loginText": "Iniciar sesión para continuar",
 }
