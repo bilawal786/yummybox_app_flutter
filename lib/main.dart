@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:yummy_box/provider/banner_provider.dart';
 import 'package:yummy_box/provider/category_provider.dart';
 import 'package:yummy_box/provider/pre_provider.dart';
+import 'package:yummy_box/provider/product_provider.dart';
 import 'package:yummy_box/screens/intro_screen.dart';
 import 'package:yummy_box/screens/login.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => BannerProvider()),
         ChangeNotifierProvider(create: (ctx) => CategoryProvider()),
         ChangeNotifierProvider(create: (ctx) => PreProvider()),
+        ChangeNotifierProvider(create: (ctx) => ProductProvider()),
       ],
       child: MaterialApp(
         theme: ThemeData(
@@ -41,7 +43,7 @@ class MyApp extends StatelessWidget {
         ],
         debugShowCheckedModeBanner: false,
         routes: {
-          "/": (context) => IntroScreen(),
+          "/": (context) => Login(),
         },
       ),
     );
