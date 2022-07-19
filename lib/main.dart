@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:yummy_box/provider/banner_provider.dart';
 import 'package:yummy_box/provider/category_provider.dart';
 import 'package:yummy_box/provider/pre_provider.dart';
@@ -33,6 +34,9 @@ class MyApp extends StatelessWidget {
         supportedLocales: L10n.all,
         localizationsDelegates: [
           AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
         ],
         debugShowCheckedModeBanner: false,
         routes: {
