@@ -12,27 +12,9 @@ class ProductWidget extends StatefulWidget {
 
 class _ProductWidgetState extends State<ProductWidget> {
 
-  var _isInit = true;
-
-  @override
-  void didChangeDependencies() {
-    if(_isInit){
-
-      Provider.of<ProductProvider>(context).getProducts();
-    }
-    _isInit = false;
-    setState((){
-      isloading = false;
-    });
-    super.didChangeDependencies();
-  }
-  var isloading = true;
-
   @override
   Widget build(BuildContext context) {
-    final prodData = Provider.of<ProductProvider>(context, listen: false);
-    final prod = prodData.productItems;
-    return isloading  == true ? Center(child: CircularProgressIndicator(),) : Card(
+    return Card(
       child: Row(
         children: [
           Expanded(
@@ -44,7 +26,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                 shape: BadgeShape.square,
                 badgeColor: Colors.red,
                 badgeContent: Text(
-                  '${prod[0].quantity}',
+                  '4',
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -53,7 +35,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                   top: 10,start: 10,
                 ),
                 child: Image.network(
-                  "${prod[0].shopImage}",
+                  "https://play-lh.googleusercontent.com/L88AUHyAOXdguuiqlBGrDF2Z1aWgKVlUXLDVEZpV4i-IH7SiK2N9NbhiskUpEJMDbw",
                   height: 130,
                   width: double.infinity,
                 ),
@@ -70,14 +52,14 @@ class _ProductWidgetState extends State<ProductWidget> {
                 CrossAxisAlignment.start,
                 children: [
                   Text(
-                   '${prod[0].productName}' ,
+                   'patis creation kreyol' ,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    "${prod[0].shopName}",
+                    "Mr salade shop",
                     style: TextStyle(
                       fontSize: 10,
                       color: Colors.red,
@@ -86,7 +68,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                   Row(
                     children: [
                       Image.network(
-                        "${prod[0].shopLogo}",
+                        "https://play-lh.googleusercontent.com/L88AUHyAOXdguuiqlBGrDF2Z1aWgKVlUXLDVEZpV4i-IH7SiK2N9NbhiskUpEJMDbw",
                         height: 30,
                         width: 30,
                       ),
@@ -99,7 +81,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                         ),
                       ),
                       Text(
-                        "${prod[0].likes}",
+                        "250",
                         style: TextStyle(
                           color: Colors.red,
                           fontSize: 10,
@@ -111,7 +93,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                   Row(
                     children: [
                       Text(
-                        "${prod[0].discountPrice}",
+                        "20€",
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -120,7 +102,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                       ),
                       SizedBox(width: 10,),
                       Text(
-                        "${prod[0].price}",
+                        "25€",
                         style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
@@ -133,7 +115,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                   Row(
                     children: [
                       Text(
-                        "${prod[0].startTime}",
+                        "10:00",
                         style: TextStyle(
                           fontSize: 8,
                           color: Colors.black,
@@ -141,7 +123,15 @@ class _ProductWidgetState extends State<ProductWidget> {
                       ),
                       SizedBox(width: 10,),
                       Text(
-                        "${prod[0].endTime}",
+                        "to",
+                        style: TextStyle(
+                          fontSize: 8,
+                          color: Colors.black,
+                        ),
+                      ),
+                      SizedBox(width: 5,),
+                      Text(
+                        "12:00",
                         style: TextStyle(
                           fontSize: 8,
                           color: Colors.black,
@@ -151,7 +141,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                   ),
                   SizedBox(height: 5,),
                   Text(
-                    "${prod[0].country}",
+                    "Guadeloupe",
                     style: TextStyle(
                       fontSize: 8,
                       color: Colors.black,
