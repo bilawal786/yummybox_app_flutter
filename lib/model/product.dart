@@ -11,6 +11,7 @@ String productModelToJson(List<ProductModel> data) => json.encode(List<dynamic>.
 class ProductModel {
   ProductModel({
      required this.productId,
+     required this.product_image,
    required this.shopId,
    required this.shopName,
    required this.address,
@@ -30,6 +31,7 @@ class ProductModel {
   });
 
   int productId;
+  String product_image;
   int shopId;
   String shopName;
   String address;
@@ -49,6 +51,7 @@ class ProductModel {
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
     productId: json["product_id"],
+    product_image: json["product_image"],
     shopId: json["shop_id"],
     shopName: json["shop_name"],
     address: json["address"],
@@ -69,6 +72,7 @@ class ProductModel {
 
   Map<String, dynamic> toJson() => {
     "product_id": productId,
+    "product_image": product_image,
     "shop_id": shopId,
     "shop_name": shopName,
     "address": address,

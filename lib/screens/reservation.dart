@@ -36,8 +36,8 @@ class _MyReservationState extends State<MyReservation> {
                   itemCount: 4,
                   itemBuilder: (ctx, index) => GestureDetector(
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => ProucttDetail()));
+                      // Navigator.push(context,
+                      //     MaterialPageRoute(builder: (context) => ProucttDetail()));
                     },
                     child: Card(
                       child: Row(

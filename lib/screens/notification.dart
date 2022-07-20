@@ -32,8 +32,8 @@ class MyNotification extends StatelessWidget {
                   itemCount: 8,
                   itemBuilder: (ctx, index) => GestureDetector(
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => ProucttDetail()));
+                      // Navigator.push(context,
+                          // MaterialPageRoute(builder: (context) => ProucttDetail()));
                     },
                     child: Card(
                       child: Row(

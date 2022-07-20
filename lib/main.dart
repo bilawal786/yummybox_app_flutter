@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yummy_box/provider/banner_provider.dart';
 import 'package:yummy_box/provider/category_provider.dart';
+import 'package:yummy_box/provider/location_provider.dart';
 import 'package:yummy_box/provider/pre_provider.dart';
 import 'package:yummy_box/provider/product_provider.dart';
 import 'package:yummy_box/screens/login.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => CategoryProvider()),
         ChangeNotifierProvider(create: (ctx) => PreProvider()),
         ChangeNotifierProvider(create: (ctx) => ProductProvider()),
+        ChangeNotifierProvider(create: (ctx) => LocationProvider()),
       ],
       child: MaterialApp(
         theme: ThemeData(

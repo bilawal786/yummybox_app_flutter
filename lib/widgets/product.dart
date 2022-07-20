@@ -1,10 +1,12 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:yummy_box/model/product.dart';
 import 'package:yummy_box/provider/product_provider.dart';
 
 class ProductWidget extends StatefulWidget {
-  ProductWidget({Key? key}) : super(key: key);
+  final ProductModel products;
+  ProductWidget({Key? key, required this.products}) : super(key: key);
 
   @override
   State<ProductWidget> createState() => _ProductWidgetState();
@@ -26,7 +28,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                 shape: BadgeShape.square,
                 badgeColor: Colors.red,
                 badgeContent: Text(
-                  '4',
+                  widget.products.quantity.toString(),
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -35,14 +37,14 @@ class _ProductWidgetState extends State<ProductWidget> {
                   top: 10,start: 10,
                 ),
                 child: Image.network(
-                  "https://play-lh.googleusercontent.com/L88AUHyAOXdguuiqlBGrDF2Z1aWgKVlUXLDVEZpV4i-IH7SiK2N9NbhiskUpEJMDbw",
+                  widget.products.shopImage,
                   height: 130,
                   width: double.infinity,
                 ),
               ),
             ),),
           SizedBox(
-            width: 20,
+            width: 5,
           ),
           Expanded(
             child: Padding(
@@ -52,14 +54,14 @@ class _ProductWidgetState extends State<ProductWidget> {
                 CrossAxisAlignment.start,
                 children: [
                   Text(
-                   'patis creation kreyol' ,
+                    widget.products.productName ,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    "Mr salade shop",
+                    widget.products.shopName,
                     style: TextStyle(
                       fontSize: 10,
                       color: Colors.red,
@@ -68,7 +70,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                   Row(
                     children: [
                       Image.network(
-                        "https://play-lh.googleusercontent.com/L88AUHyAOXdguuiqlBGrDF2Z1aWgKVlUXLDVEZpV4i-IH7SiK2N9NbhiskUpEJMDbw",
+                        widget.products.shopLogo,
                         height: 30,
                         width: 30,
                       ),
@@ -81,7 +83,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                         ),
                       ),
                       Text(
-                        "250",
+                        widget.products.likes.toString(),
                         style: TextStyle(
                           color: Colors.red,
                           fontSize: 10,
@@ -92,38 +94,42 @@ class _ProductWidgetState extends State<ProductWidget> {
                   ),
                   Row(
                     children: [
+
+                      Text('Panier a', style: TextStyle(fontSize: 14,
+                      color: Colors.red,
+                        fontWeight: FontWeight.bold,
+                      ),),
+                      SizedBox(width: 2,),
                       Text(
-                        "20€",
+                        widget.products.discountPrice,
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: Colors.red,
                         ),
                       ),
-                      SizedBox(width: 10,),
+                      Text("€", style: TextStyle(fontSize: 14, color: Colors.red),),
+                      SizedBox(width: 3,),
                       Text(
-                        "25€",
+                        widget.products.price,
                         style: TextStyle(
-                            fontSize: 14,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
-                            color: Colors.red,
+                            color: Colors.black,
                             decoration: TextDecoration.lineThrough
                         ),
                       ),
+                      Text('€', style: TextStyle(fontSize: 14, color: Colors.black),),
                     ],
                   ),
+                  SizedBox(height: 10,),
                   Row(
                     children: [
+
+                      Text('Disponible de', style: TextStyle(fontSize: 8),),
+                      SizedBox(width: 2,),
                       Text(
-                        "10:00",
-                        style: TextStyle(
-                          fontSize: 8,
-                          color: Colors.black,
-                        ),
-                      ),
-                      SizedBox(width: 10,),
-                      Text(
-                        "to",
+                        widget.products.startTime,
                         style: TextStyle(
                           fontSize: 8,
                           color: Colors.black,
@@ -131,7 +137,15 @@ class _ProductWidgetState extends State<ProductWidget> {
                       ),
                       SizedBox(width: 5,),
                       Text(
-                        "12:00",
+                        'to',
+                        style: TextStyle(
+                          fontSize: 8,
+                          color: Colors.black,
+                        ),
+                      ),
+                      SizedBox(width: 5,),
+                      Text(
+                        widget.products.endTime,
                         style: TextStyle(
                           fontSize: 8,
                           color: Colors.black,
@@ -139,9 +153,8 @@ class _ProductWidgetState extends State<ProductWidget> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 5,),
                   Text(
-                    "Guadeloupe",
+                    widget.products.country,
                     style: TextStyle(
                       fontSize: 8,
                       color: Colors.black,

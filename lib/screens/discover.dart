@@ -3,8 +3,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:yummy_box/provider/category_provider.dart';
 import 'package:yummy_box/provider/pre_provider.dart';
+import 'package:yummy_box/provider/product_provider.dart';
 import 'package:yummy_box/screens/productdetail.dart';
 import 'package:yummy_box/widgets/product.dart';
+import 'package:yummy_box/widgets/shop.dart';
 
 import '../provider/banner_provider.dart';
 import 'package:provider/provider.dart';
@@ -25,6 +27,7 @@ class _MyDiscoverState extends State<MyDiscover> {
       Provider.of<BannerProvider>(context).getBanners();
       Provider.of<CategoryProvider>(context).getCategories();
       Provider.of<PreProvider>(context).getPre();
+      Provider.of<ProductProvider>(context).getProducts();
     }
     _isInit = false;
     super.didChangeDependencies();
@@ -40,6 +43,8 @@ class _MyDiscoverState extends State<MyDiscover> {
     final categories = categoriesData.categoryItems;
     final preData = Provider.of<PreProvider>(context, listen: false);
     final pre = preData.preItems;
+    final productData = Provider.of<ProductProvider>(context, listen: false);
+    final products = productData.productItems;
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
@@ -117,7 +122,6 @@ class _MyDiscoverState extends State<MyDiscover> {
                 SizedBox(
                   height: 30,
                 ),
-
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
@@ -164,15 +168,15 @@ class _MyDiscoverState extends State<MyDiscover> {
                   child: ListView.builder(
                       shrinkWrap: true,
                       physics: ClampingScrollPhysics(),
-                      itemCount: 5,
+                      itemCount: products.length,
                       itemBuilder: (ctx, index) => GestureDetector(
                             onTap: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ProucttDetail()));
+                                      builder: (context) => ProucttDetail(products: products[index],)));
                             },
-                            child: ProductWidget(),
+                            child:  ProductWidget(products: products[index]),
                           ),
                   ),
                 ),

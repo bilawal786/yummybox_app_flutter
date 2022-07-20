@@ -15,7 +15,7 @@ class ProductProvider with ChangeNotifier {
 
   Future<void> getProducts() async {
     var response = await http.get(
-      Uri.parse('http://demo.yummybox.fr/api/products/1'),
+      Uri.parse('https://demo.yummybox.fr/api/products/1'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
@@ -28,6 +28,7 @@ class ProductProvider with ChangeNotifier {
         loadedProducts.add(
          ProductModel(
              productId: e['product_id'],
+             product_image: e['product_image'],
              shopId: e['shop_id'],
              shopName: e['shop_name'],
              address: e['address'],
@@ -52,5 +53,6 @@ class ProductProvider with ChangeNotifier {
     } else {
       print("request not work");
     }
+    print(response.body);
   }
 }

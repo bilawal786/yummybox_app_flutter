@@ -27,10 +27,10 @@ class _MyFavouriteState extends State<MyFavourite> {
                 itemCount: 5,
                 itemBuilder: (ctx, index) => GestureDetector(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ProucttDetail()));
+                    // Navigator.push(context,
+                    //     MaterialPageRoute(builder: (context) => ProucttDetail(products: [index],)));
                   },
-                  child: ProductWidget(),
+                  child: Container(),
                 ),
               ),
             ),

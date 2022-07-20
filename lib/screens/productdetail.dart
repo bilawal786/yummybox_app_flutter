@@ -1,9 +1,11 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:yummy_box/model/product.dart';
 import 'package:yummy_box/widgets/drawer.dart';
 
 class ProucttDetail extends StatefulWidget {
-  const ProucttDetail({Key? key}) : super(key: key);
+  final ProductModel products;
+  const ProucttDetail({Key? key, required this.products}) : super(key: key);
 
   @override
   State<ProucttDetail> createState() => _ProucttDetailState();
@@ -20,7 +22,7 @@ class _ProucttDetailState extends State<ProucttDetail> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text(
-          "Agri-O-Conso",
+          widget.products.shopName,
           style: TextStyle(
             color: Colors.black,
             fontSize: 18,
@@ -31,7 +33,10 @@ class _ProucttDetailState extends State<ProucttDetail> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset("assets/test-image.jpeg"),
+            SizedBox(
+              width: double.infinity,
+                height: 250,
+                child: Image.network(widget.products.product_image, fit: BoxFit.cover,)),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Card(
@@ -52,7 +57,7 @@ class _ProucttDetailState extends State<ProucttDetail> {
                                     shape: BadgeShape.square,
                                     borderRadius: BorderRadius.circular(3),
                                     badgeContent: Text(
-                                      "4",
+                                      widget.products.quantity.toString(),
                                       style: TextStyle(color: Colors.white),
                                     ),
                                     badgeColor: Colors.red,
@@ -63,7 +68,7 @@ class _ProucttDetailState extends State<ProucttDetail> {
                                     width: 15,
                                   ),
                                   Text(
-                                    "Box legumes fraicheur",
+                                    widget.products.productName,
                                     style: TextStyle(
                                         fontSize: 16, fontWeight: FontWeight.bold),
                                   ),
@@ -89,15 +94,19 @@ class _ProucttDetailState extends State<ProucttDetail> {
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
-                          Column(
-                            children: [
-                              Text(
-                                "25.00€",
-                                style: TextStyle(color: Colors.red, fontWeight: FontWeight.w900, fontSize: 18),
-                              ),
-
-                            ],
+                          Text('Panier a', style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 18),),
+                          SizedBox(width: 5,),
+                          Text(
+                            widget.products.discountPrice,
+                            style: TextStyle(color: Colors.red, fontWeight: FontWeight.w900, fontSize: 18),
                           ),
+                          Text('€', style: TextStyle(fontSize: 18, color: Colors.red, fontWeight: FontWeight.bold),),
+                          SizedBox(width: 10,),
+
+                          Text(widget.products.price,
+                          style:  TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18,decoration: TextDecoration.lineThrough),
+                          ),
+                          Text('€', style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),),
                         ],
                       ),
                     ),
@@ -110,7 +119,13 @@ class _ProucttDetailState extends State<ProucttDetail> {
                           SizedBox(
                             width: 5,
                           ),
-                          Text("Disponsible de 07:00 a 18:00", style: TextStyle(color: Colors.black45),),
+                          Text('Disponible de', style: TextStyle(fontSize: 12, color: Colors.black),),
+                          SizedBox(width: 5,),
+                          Text(widget.products.startTime, style: TextStyle(color: Colors.black),),
+                          SizedBox(width: 5,),
+                          Text('to'),
+                          SizedBox(width: 5,),
+                          Text(widget.products.endTime, style: TextStyle(color: Colors.black),),
                         ],
                       ),
                     ),
@@ -125,7 +140,7 @@ class _ProucttDetailState extends State<ProucttDetail> {
                               padding: EdgeInsets.only(left: 10),
                               width: 200,
                               child: Text(
-                                "Boulevard du Perou, Les Abymes,Guadloupe",
+                                widget.products.address,
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
@@ -167,8 +182,7 @@ class _ProucttDetailState extends State<ProucttDetail> {
                     SizedBox(
                       height: 10,
                     ),
-                    Text("Panier legumes FRAICHEUR bouquet a soupe banane jaune citron tomates salade courgette christophine carotte  piment vegetaerian.",
-                    style: TextStyle(color: Colors.black45),),
+                    Text(widget.products.productDescription, style: TextStyle(fontSize: 14, color: Colors.black),),
                   ]),
                 ),
               ),
@@ -243,7 +257,7 @@ class _ProucttDetailState extends State<ProucttDetail> {
                                 padding: const EdgeInsets.only(
                                     left: 40, right: 40, top: 10, bottom: 5),
                                 child: Text(
-                                  "3",
+                                  widget.products.likes.toString(),
                                   style: TextStyle(
                                       fontSize: 20, fontWeight: FontWeight.bold),
                                 )),
@@ -275,7 +289,7 @@ class _ProucttDetailState extends State<ProucttDetail> {
                         fontWeight: FontWeight.bold),
                   ),
                   icon: Icon(
-                    Icons.add_chart,
+                    Icons.shopping_bag,
                     size: 20,
                     color: Colors.white,
                   ),
@@ -307,8 +321,7 @@ class _ProucttDetailState extends State<ProucttDetail> {
                     SizedBox(
                       height: 10,
                     ),
-                    Text("Les fruits et legumes frais et de qualites, rien que pour vous",
-                      style: TextStyle(color: Colors.black45),),
+                    Text(widget.products.shopDescription),
                   ]),
                 ),
               ),

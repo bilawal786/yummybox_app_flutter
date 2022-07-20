@@ -61,8 +61,8 @@ class _MyTradersState extends State<MyTraders> {
                 itemCount: 5,
                 itemBuilder: (ctx, index) => GestureDetector(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ProucttDetail()));
+                    // Navigator.push(context,
+                    //     MaterialPageRoute(builder: (context) => ProucttDetail()));
                   },
                   child: Card(
                     child: Row(

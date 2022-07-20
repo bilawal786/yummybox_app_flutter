@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:yummy_box/provider/location_provider.dart';
 import 'package:yummy_box/screens/login.dart';
 import 'package:yummy_box/screens/notification.dart';
 import 'package:yummy_box/screens/profile.dart';
@@ -17,7 +19,21 @@ class MyDrawer extends StatefulWidget {
 }
 
 class _MyDrawerState extends State<MyDrawer> {
-  String? valueChoose;
+  var _isInit = true;
+
+  @override
+  void didChangeDependencies() {
+    if(_isInit){
+      Provider.of<LocationProvider>(context).getLocations();
+
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
+
+
+
+  String? valueChoose = "";
   List listItem = [
     "Guadeloupe",
     "Martinique",
@@ -28,6 +44,8 @@ class _MyDrawerState extends State<MyDrawer> {
 
   @override
   Widget build(BuildContext context) {
+    final locationData = Provider.of<LocationProvider>(context, listen: false);
+    final locations = locationData.locationItems;
     return Drawer(
       backgroundColor: Color.fromARGB(255, 196, 42, 97),
       child: Column(
@@ -221,23 +239,23 @@ class _MyDrawerState extends State<MyDrawer> {
               hint: Padding(
                 padding: const EdgeInsets.only(left: 16),
                 child: Text(
-                  "Guadeloupe",
+                  locations.length.toString(),
                   style: TextStyle(
                     fontSize: 14,
                     color: Colors.black,
                   ),
                 ),
               ),
-              value: valueChoose,
-              onChanged: (newValue) {
+              onChanged: (newvalue) {
+
                 setState(() {
-                  valueChoose = newValue as String?;
+                  valueChoose = newvalue.toString();
                 });
               },
-              items: listItem.map((valueItem) {
+              items: locations.map((locationitems) {
                 return DropdownMenuItem(
-                  value: valueItem,
-                  child: Text(valueItem),
+                  value: locationitems,
+                  child: Text(locationitems.name),
                 );
               }).toList(),
               isExpanded: true,
