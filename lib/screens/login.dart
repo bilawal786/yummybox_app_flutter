@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:yummy_box/screens/Forgetpassword.dart';
 import 'package:yummy_box/screens/sign-in.dart';
 import 'package:yummy_box/screens/sign-up.dart';
-import 'package:flutter_gen/gen_l10n/app_localization.dart';
-import '../provider/local_provider.dart';
-
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
 
@@ -18,11 +14,6 @@ class _LoginState extends State<Login> {
 
   void initState() {
     super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final provider = Provider.of<LocaleProvider>(context, listen: false);
-      provider.clearLocale();
-    });
   }
 
   String name = "";
@@ -49,7 +40,7 @@ class _LoginState extends State<Login> {
                     height: 10,
                   ),
                   Text(
-                    AppLocalizations.of(context)!.loginText,
+                    "Login to continoue",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 12,
