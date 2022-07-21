@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:yummy_box/provider/banner_provider.dart';
 import 'package:yummy_box/provider/category_provider.dart';

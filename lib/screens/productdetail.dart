@@ -1,5 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:yummy_box/model/product.dart';
 import 'package:yummy_box/widgets/drawer.dart';
 
@@ -182,7 +183,7 @@ class _ProucttDetailState extends State<ProucttDetail> {
                     SizedBox(
                       height: 10,
                     ),
-                    Text(widget.products.productDescription, style: TextStyle(fontSize: 14, color: Colors.black),),
+                    Html(data: widget.products.productDescription),
                   ]),
                 ),
               ),
@@ -219,20 +220,15 @@ class _ProucttDetailState extends State<ProucttDetail> {
                                   left: 30, right: 30, top: 10, bottom: 5),
                               child:
                               IconButton(
-                                onPressed: () {
-                                  setState((){
-                                    check = true;
-                                  });
-                                },
-                                color: Colors.blueGrey,
+                                onPressed:(){ widget.products.toggleFav();},
                                 highlightColor: Colors.amberAccent, //<-- SEE HERE
                                 iconSize: 30,
-                                icon: Icon(
-                                  check == false?
-                                  Icons.favorite_outline_sharp:Icons.favorite,
+                                icon: widget.products.isLike == true ? Icon(
+                                 Icons.favorite,
                                   color: Colors.red,
-
-
+                                ) : Icon(
+                                  Icons.favorite_outline_sharp,
+                                  color: Colors.red,
                                 ),
                               )
                             ),
@@ -321,7 +317,7 @@ class _ProucttDetailState extends State<ProucttDetail> {
                     SizedBox(
                       height: 10,
                     ),
-                    Text(widget.products.shopDescription),
+                    Html(data: widget.products.shopDescription),
                   ]),
                 ),
               ),

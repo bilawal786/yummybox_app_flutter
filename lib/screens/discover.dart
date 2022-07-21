@@ -43,7 +43,7 @@ class _MyDiscoverState extends State<MyDiscover> {
     final categories = categoriesData.categoryItems;
     final preData = Provider.of<PreProvider>(context, listen: false);
     final pre = preData.preItems;
-    final productData = Provider.of<ProductProvider>(context, listen: false);
+    final productData = Provider.of<ProductProvider>(context);
     final products = productData.productItems;
     return Scaffold(
       body: SingleChildScrollView(

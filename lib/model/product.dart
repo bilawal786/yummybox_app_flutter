@@ -3,12 +3,13 @@
 //     final productModel = productModelFromJson(jsonString);
 
 import 'dart:convert';
+import 'package:flutter/material.dart';
 
 List<ProductModel> productModelFromJson(String str) => List<ProductModel>.from(json.decode(str).map((x) => ProductModel.fromJson(x)));
 
 String productModelToJson(List<ProductModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class ProductModel {
+class ProductModel with ChangeNotifier {
   ProductModel({
      required this.productId,
      required this.product_image,
@@ -27,7 +28,7 @@ class ProductModel {
    required this.shopLogo,
    required this.productDescription,
    required this.shopDescription,
-    required this.isLike,
+    this.isLike = false,
   });
 
   int productId;
@@ -47,7 +48,7 @@ class ProductModel {
   String shopLogo;
   String productDescription;
   String shopDescription;
-  bool isLike;
+  bool isLike = false;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
     productId: json["product_id"],
@@ -90,4 +91,11 @@ class ProductModel {
     "shop_description": shopDescription,
     "is_like": isLike,
   };
+
+
+  void toggleFav() {
+    isLike = !isLike;
+    notifyListeners();
+    print(isLike);
+  }
 }
