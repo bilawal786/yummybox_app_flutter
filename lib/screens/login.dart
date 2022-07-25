@@ -1,7 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yummy_box/screens/Forgetpassword.dart';
+import 'package:yummy_box/screens/routes.dart';
 import 'package:yummy_box/screens/sign-in.dart';
 import 'package:yummy_box/screens/sign-up.dart';
+import 'package:http/http.dart' as http;
+import '../model/login_model.dart';
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
 
@@ -21,6 +27,47 @@ class _LoginState extends State<Login> {
   bool valuefirst = false;
   bool valuesecond = false;
   final _formKey = GlobalKey();
+  var isloaded = 0;
+
+  Future<void> login(email, password) async {
+    try {
+      var response = await http.post(
+        Uri.parse('https://demo.yummybox.fr/api/login' + '/login'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json'
+        },
+        body:
+        jsonEncode(<String, String>{'email': email, 'password': password}),
+      );
+
+      if (response.statusCode == 200) {
+        final login = loginModelFromJson(jsonDecode(response.body));
+
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('token', login.token);
+        await prefs.setString('email', login.user.email);
+        await prefs.setString('name', login.user.name);
+        await prefs.setString('username', login.user.username);
+        await prefs.setString('email', login.user.name);
+        await prefs.setString('phone', login.user.phone);
+        await prefs.setString('email', login.user.name);
+        await prefs.setString('img', login.user.img);
+        setState(() {
+          isloaded = 0;
+        });
+        Navigator.of(context).pushReplacementNamed(MyRoutes.login);
+      } else {
+        setState(() {
+          isloaded = 0;
+        });
+        print(response.body.toString());
+        throw Exception('Failed to login.');
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

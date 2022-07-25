@@ -83,6 +83,31 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
 
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 10.0, horizontal: 20.0),
+                  child: TextFormField(
+                    style: TextStyle(
+                      fontSize: 12,
+                    ),
+                    decoration: const InputDecoration(
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.green,
+                            )),
+                        hintText: 'Doe',
+                        labelText: 'User Name*',
+                        iconColor: Colors.white),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "please enter user name";
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+
+
 
                 Padding(
                   padding: const EdgeInsets.symmetric(
@@ -298,7 +323,7 @@ class _SignUpState extends State<SignUp> {
                                 maxWidth: 270.0, minHeight: 50.0),
                             alignment: Alignment.center,
                             child: Text(
-                              "Creer un compte",
+                              "Create an account!",
                               textAlign: TextAlign.center,
                               style: TextStyle(color: Colors.white),
                             ),

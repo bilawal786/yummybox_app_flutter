@@ -11,6 +11,8 @@ import 'package:yummy_box/screens/suggest.dart';
 import 'package:yummy_box/screens/support.dart';
 import 'package:yummy_box/screens/traders.dart';
 
+import '../screens/discover.dart';
+
 class MyDrawer extends StatefulWidget {
   const MyDrawer({Key? key}) : super(key: key);
 
@@ -239,22 +241,26 @@ class _MyDrawerState extends State<MyDrawer> {
               hint: Padding(
                 padding: const EdgeInsets.only(left: 16),
                 child: Text(
-                  locations.length.toString(),
+                  valueChoose!,
                   style: TextStyle(
                     fontSize: 14,
                     color: Colors.black,
                   ),
                 ),
               ),
-              onChanged: (newvalue) {
-
+              onChanged: (newvalue)
+              {
                 setState(() {
                   valueChoose = newvalue.toString();
                 });
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyDiscover(id: valueChoose??"1")),
+                );
               },
               items: locations.map((locationitems) {
                 return DropdownMenuItem(
-                  value: locationitems,
+                  value: locationitems.id,
                   child: Text(locationitems.name),
                 );
               }).toList(),

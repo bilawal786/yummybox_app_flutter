@@ -11,8 +11,11 @@ import 'package:yummy_box/widgets/shop.dart';
 import '../provider/banner_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../provider/location_provider.dart';
+
 class MyDiscover extends StatefulWidget {
-  const MyDiscover({Key? key}) : super(key: key);
+  final String id;
+  const MyDiscover({Key? key, required this.id}) : super(key: key);
 
   @override
   State<MyDiscover> createState() => _MyDiscoverState();
@@ -33,8 +36,6 @@ class _MyDiscoverState extends State<MyDiscover> {
     super.didChangeDependencies();
   }
 
-  final List _preTitle = ['Renee', '0 Marche', 'Denial'];
-
   @override
   Widget build(BuildContext context) {
     final bannerData = Provider.of<BannerProvider>(context, listen: false);
@@ -43,7 +44,7 @@ class _MyDiscoverState extends State<MyDiscover> {
     final categories = categoriesData.categoryItems;
     final preData = Provider.of<PreProvider>(context, listen: false);
     final pre = preData.preItems;
-    final productData = Provider.of<ProductProvider>(context);
+    final productData = Provider.of<ProductProvider>(context, listen: false);
     final products = productData.productItems;
     return Scaffold(
       body: SingleChildScrollView(
@@ -81,9 +82,10 @@ class _MyDiscoverState extends State<MyDiscover> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Our Categories",
+                        widget.id,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,

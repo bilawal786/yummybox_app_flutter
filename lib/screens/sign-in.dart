@@ -17,7 +17,7 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   var index = 0;
   var navList = [
-    MyDiscover(),
+    MyDiscover(id: '',),
     MyMap(),
     MyFavourite(),
     MyReservation(),
