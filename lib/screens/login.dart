@@ -1,3 +1,4 @@
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -8,6 +9,13 @@ import 'package:yummy_box/screens/sign-in.dart';
 import 'package:yummy_box/screens/sign-up.dart';
 import 'package:http/http.dart' as http;
 import '../model/login_model.dart';
+import 'discover.dart';
+import 'discover.dart';
+import 'notification.dart';
+
+
+
+
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
 
@@ -16,58 +24,78 @@ class Login extends StatefulWidget {
 }
 
 
+
 class _LoginState extends State<Login> {
 
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  Future<void> login(email, password) async {
+    try {
+      var response = await http.post(
+        Uri.parse('https://demo.yummybox.fr/api/login'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json',
+        },
+        body:
+        jsonEncode(<String, String>{'email': emailController.text, 'password': passwordController.text}),
+      );
+      if (response.statusCode == 200) {
+        print('login successfully ');
+        print(emailController.text);
+        print(passwordController.text);
+         final login = LoginModel.fromJson(jsonDecode(response.body));
+
+         final SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('token', login.token);
+        await prefs.setString('name', login.user.name);
+        await  prefs.setString('email', login.user.email);
+        await prefs.setString('username', login.user.username);
+         await prefs.setInt('id', login.user.id);
+         await prefs.setInt('roles', login.user.roles);
+         await prefs.setString('phone', login.user.phone);
+         await prefs.setString('address', login.user.address);
+         await prefs.setString('timezone', login.user.timezone);
+         await prefs.setInt('balance_id', login.user.balanceId);
+         await prefs.setString('refferal', login.user.refferal);
+         await prefs.setString('img', login.user.img);
+
+
+         Navigator.push(
+           context,
+           MaterialPageRoute(builder: (context) => MyDiscover(id: '1')),
+         );
+      } else {
+        print('Response not working');
+      }
+      print(response.body);
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  LoginButtonPressed(){
+   login(emailController.text, passwordController.text);
+  }
+  @override
   void initState() {
     super.initState();
   }
+  @override
+  void dispose(){
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
-  String name = "";
   bool changeButton = false;
   bool valuefirst = false;
   bool valuesecond = false;
   final _formKey = GlobalKey();
   var isloaded = 0;
 
-  Future<void> login(email, password) async {
-    try {
-      var response = await http.post(
-        Uri.parse('https://demo.yummybox.fr/api/login' + '/login'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Accept': 'application/json'
-        },
-        body:
-        jsonEncode(<String, String>{'email': email, 'password': password}),
-      );
 
-      if (response.statusCode == 200) {
-        final login = loginModelFromJson(jsonDecode(response.body));
-
-        final SharedPreferences prefs = await SharedPreferences.getInstance();
-        await prefs.setString('token', login.token);
-        await prefs.setString('email', login.user.email);
-        await prefs.setString('name', login.user.name);
-        await prefs.setString('username', login.user.username);
-        await prefs.setString('email', login.user.name);
-        await prefs.setString('phone', login.user.phone);
-        await prefs.setString('email', login.user.name);
-        await prefs.setString('img', login.user.img);
-        setState(() {
-          isloaded = 0;
-        });
-        Navigator.of(context).pushReplacementNamed(MyRoutes.login);
-      } else {
-        setState(() {
-          isloaded = 0;
-        });
-        print(response.body.toString());
-        throw Exception('Failed to login.');
-      }
-    } catch (e) {
-      print(e.toString());
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,6 +130,7 @@ class _LoginState extends State<Login> {
                     padding: const EdgeInsets.symmetric(
                         vertical: 10.0, horizontal: 20.0),
                     child: TextFormField(
+                      controller: emailController,
                       style: TextStyle(
                         fontSize: 12,
                       ),
@@ -115,16 +144,19 @@ class _LoginState extends State<Login> {
                           iconColor: Colors.white),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "please enter user email";
+                          return "please enter your Email";
+                        } else if (value.length < 30) {
+                          return " write your email";
                         }
                         return null;
-                      },
+                      }
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 10.0, horizontal: 20.0),
                     child: TextFormField(
+                      controller: passwordController,
                       style: TextStyle(
                         fontSize: 12,
                       ),
@@ -183,8 +215,9 @@ class _LoginState extends State<Login> {
                       Container(
                         height: 50.0,
                         child: RaisedButton(
-                          onPressed: () {
 
+                          onPressed: () {
+                            LoginButtonPressed();
                           },
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(80.0)),
@@ -231,6 +264,7 @@ class _LoginState extends State<Login> {
                             "Forgot your password?",
                             style: TextStyle(
                               fontSize: 12,
+                              color: Colors.red,
                             ),
                           ),
                         ),
