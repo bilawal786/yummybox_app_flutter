@@ -49,6 +49,9 @@ dependencies:
   flutter_html: ^2.2.1
   easy_localization: ^3.0.1
   shared_preferences: ^2.0.15
+  dropdownfield: 1.0.0
+  dropdown_formfield: ^0.1.4
+
 
 
 dev_dependencies:

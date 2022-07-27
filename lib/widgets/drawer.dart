@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yummy_box/provider/location_provider.dart';
 import 'package:yummy_box/screens/login.dart';
 import 'package:yummy_box/screens/notification.dart';
 import 'package:yummy_box/screens/profile.dart';
 import 'package:yummy_box/screens/recharge.dart';
+import 'package:yummy_box/screens/sign-in.dart';
 import 'package:yummy_box/screens/sponsorship.dart';
 import 'package:yummy_box/screens/suggest.dart';
 import 'package:yummy_box/screens/support.dart';
@@ -44,6 +46,31 @@ class _MyDrawerState extends State<MyDrawer> {
     "Saint-Martin"
   ];
 
+  OnDisconnect () async{
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.clear();
+  }
+
+  String username = '';
+  String img = '';
+  String points = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCounter();
+  }
+  _loadCounter() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+
+      username = (prefs.getString('username') ?? '');
+      img = (prefs.getString('img') ?? '');
+      points = (prefs.getString('points') ?? '');
+
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final locationData = Provider.of<LocationProvider>(context, listen: false);
@@ -63,7 +90,7 @@ class _MyDrawerState extends State<MyDrawer> {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(50),
-                child: Image.asset("assets/user.png",
+                child: Image.network( '$img',
                 fit: BoxFit.cover,
                 ),
               ),
@@ -74,14 +101,20 @@ class _MyDrawerState extends State<MyDrawer> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Guest User",
+                '$username',
                 style: TextStyle(color: Colors.white),
               ),
             ],
           ),
-          Text(
-            "0 YummyCoin",
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('$points', style: TextStyle(color: Colors.white),),
+              // Text(
+              //   " YummyCoin",
+              //   style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              // ),
+            ],
           ),
           SizedBox(
             height: 30,
@@ -255,7 +288,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 });
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => MyDiscover(id: valueChoose??"1")),
+                  MaterialPageRoute(builder: (context) => SignIn()),
                 );
               },
               items: locations.map((locationitems) {
@@ -268,11 +301,14 @@ class _MyDrawerState extends State<MyDrawer> {
               underline: const SizedBox(),
             ),
           ),
+
+
           Padding(
             padding: const EdgeInsets.only(left: 20),
             child: ListTile(
               onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Login())),
+                  MaterialPageRoute(builder: (context) => Login()),
+              ),
               leading: Icon(
                 CupertinoIcons.lock,
                 color: Colors.white,

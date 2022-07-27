@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -6,15 +5,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yummy_box/screens/Forgetpassword.dart';
 import 'package:yummy_box/screens/routes.dart';
 import 'package:yummy_box/screens/sign-in.dart';
-import 'package:yummy_box/screens/sign-up.dart';
+import 'package:yummy_box/screens/register.dart';
 import 'package:http/http.dart' as http;
 import '../model/login_model.dart';
 import 'discover.dart';
 import 'discover.dart';
 import 'notification.dart';
-
-
-
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -23,67 +19,61 @@ class Login extends StatefulWidget {
   State<Login> createState() => _LoginState();
 }
 
-
-
 class _LoginState extends State<Login> {
-
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
   Future<void> login(email, password) async {
-    try {
       var response = await http.post(
         Uri.parse('https://demo.yummybox.fr/api/login'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Accept': 'application/json',
         },
-        body:
-        jsonEncode(<String, String>{'email': emailController.text, 'password': passwordController.text}),
+        body: jsonEncode(<String, String>{
+          'email': emailController.text,
+          'password': passwordController.text
+        }),
       );
       if (response.statusCode == 200) {
-        print('login successfully ');
-        print(emailController.text);
-        print(passwordController.text);
-         final login = LoginModel.fromJson(jsonDecode(response.body));
+        print('login api works');
+        final login = LoginModel.fromJson(jsonDecode(response.body));
 
-         final SharedPreferences prefs = await SharedPreferences.getInstance();
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('token', login.token);
         await prefs.setString('name', login.user.name);
-        await  prefs.setString('email', login.user.email);
-        await prefs.setString('username', login.user.username);
-         await prefs.setInt('id', login.user.id);
-         await prefs.setInt('roles', login.user.roles);
-         await prefs.setString('phone', login.user.phone);
-         await prefs.setString('address', login.user.address);
-         await prefs.setString('timezone', login.user.timezone);
-         await prefs.setInt('balance_id', login.user.balanceId);
-         await prefs.setString('refferal', login.user.refferal);
-         await prefs.setString('img', login.user.img);
-
-
-         Navigator.push(
-           context,
-           MaterialPageRoute(builder: (context) => MyDiscover(id: '1')),
-         );
+        await prefs.setString('email', login.user.email);
+        await prefs.setString('points', login.user.points);
+        await prefs.setInt('id', login.user.id);
+        await prefs.setInt('roles', login.user.roles);
+        await prefs.setString('phone', login.user.phone);
+        await prefs.setString('address', login.user.address);
+        await prefs.setString('timezone', login.user.timezone);
+        await prefs.setInt('balance_id', login.user.balanceId);
+        await prefs.setString('refferal', login.user.refferal);
+        await prefs.setString('img', login.user.img);
+        print("success respinse "+response.body);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SignIn()),
+        );
       } else {
-        print('Response not working');
+        print('Login api not working');
       }
-      print(response.body);
-    } catch (e) {
-      print(e.toString());
-    }
+      // print("Server response" + response.body);
   }
 
-  LoginButtonPressed(){
-   login(emailController.text, passwordController.text);
+  LoginButtonPressed() {
+    login(emailController.text, passwordController.text);
   }
+
   @override
   void initState() {
     super.initState();
   }
+
   @override
-  void dispose(){
+  void dispose() {
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
@@ -92,10 +82,8 @@ class _LoginState extends State<Login> {
   bool changeButton = false;
   bool valuefirst = false;
   bool valuesecond = false;
-  final _formKey = GlobalKey();
+  final _formKey = GlobalKey<FormState>();
   var isloaded = 0;
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +113,6 @@ class _LoginState extends State<Login> {
                   SizedBox(
                     height: 5,
                   ),
-
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 10.0, horizontal: 20.0),
@@ -143,13 +130,11 @@ class _LoginState extends State<Login> {
                           labelText: 'Email',
                           iconColor: Colors.white),
                       validator: (value) {
-                        if (value!.isEmpty) {
-                          return "please enter your Email";
-                        } else if (value.length < 30) {
-                          return " write your email";
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some text';
                         }
                         return null;
-                      }
+                      },
                     ),
                   ),
                   Padding(
@@ -169,10 +154,8 @@ class _LoginState extends State<Login> {
                           labelText: 'Password',
                           iconColor: Colors.white),
                       validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Password is required ?";
-                        } else if (value.length < 8) {
-                          return " validation is required";
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some text';
                         }
                         return null;
                       },
@@ -181,7 +164,6 @@ class _LoginState extends State<Login> {
                   SizedBox(
                     height: 5,
                   ),
-
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
@@ -215,8 +197,13 @@ class _LoginState extends State<Login> {
                       Container(
                         height: 50.0,
                         child: RaisedButton(
-
                           onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text('Processing Data')),
+                              );
+                            }
                             LoginButtonPressed();
                           },
                           shape: RoundedRectangleBorder(
@@ -257,8 +244,12 @@ class _LoginState extends State<Login> {
                       Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: InkWell(
-                          onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotScreen()),);
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ForgotScreen()),
+                            );
                           },
                           child: Text(
                             "Forgot your password?",
@@ -298,7 +289,8 @@ class _LoginState extends State<Login> {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => SignUp()),
+                              MaterialPageRoute(
+                                  builder: (context) => RegisterScreen()),
                             );
                           },
                           shape: RoundedRectangleBorder(

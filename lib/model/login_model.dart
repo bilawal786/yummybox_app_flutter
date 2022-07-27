@@ -32,7 +32,6 @@ class User {
   User({
    required this.id,
    required this.name,
-   required this.username,
    required this.email,
    required this.roles,
    required this.phone,
@@ -40,12 +39,12 @@ class User {
    required this.timezone,
    required this.balanceId,
    required this.refferal,
+   required this.points,
    required this.img,
   });
 
   int id;
   String name;
-  String username;
   String email;
   int roles;
   String phone;
@@ -53,12 +52,12 @@ class User {
   String timezone;
   int balanceId;
   String refferal;
+  String points;
   String img;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
     id: json["id"],
     name: json["name"],
-    username: json["username"],
     email: json["email"],
     roles: json["roles"],
     phone: json["phone"],
@@ -66,13 +65,13 @@ class User {
     timezone: json["timezone"],
     balanceId: json["balance_id"],
     refferal: json["refferal"],
+    points: json["points"],
     img: json["img"],
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
     "name": name,
-    "username": username,
     "email": email,
     "roles": roles,
     "phone": phone,
@@ -80,6 +79,7 @@ class User {
     "timezone": timezone,
     "balance_id": balanceId,
     "refferal": refferal,
+    "points": points,
     "img": img,
   };
 }

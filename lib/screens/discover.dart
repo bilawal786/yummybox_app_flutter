@@ -82,10 +82,10 @@ class _MyDiscoverState extends State<MyDiscover> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        widget.id,
+                        "Our Categories",
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
