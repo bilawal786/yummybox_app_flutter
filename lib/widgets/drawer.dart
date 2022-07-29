@@ -13,7 +13,7 @@ import 'package:yummy_box/screens/suggest.dart';
 import 'package:yummy_box/screens/support.dart';
 import 'package:yummy_box/screens/traders.dart';
 
-import '../screens/discover.dart';
+import '../screens/Home.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({Key? key}) : super(key: key);
@@ -65,7 +65,7 @@ class _MyDrawerState extends State<MyDrawer> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
 
-      img = (prefs.getString('img') ?? "");
+      img = (prefs.getString('img') ??'assets/user.png');
       name = (prefs.getString('name') ?? 'Guest User');
       points = (prefs.getString('points') ?? '  Yummycoins0');
 

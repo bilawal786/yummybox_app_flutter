@@ -8,8 +8,8 @@ import 'package:yummy_box/screens/sign-in.dart';
 import 'package:yummy_box/screens/register.dart';
 import 'package:http/http.dart' as http;
 import '../model/login_model.dart';
-import 'discover.dart';
-import 'discover.dart';
+import 'Home.dart';
+import 'Home.dart';
 import 'notification.dart';
 
 class Login extends StatefulWidget {

@@ -5,6 +5,7 @@ import 'package:yummy_box/provider/category_provider.dart';
 import 'package:yummy_box/provider/location_provider.dart';
 import 'package:yummy_box/provider/pre_provider.dart';
 import 'package:yummy_box/provider/product_provider.dart';
+import 'package:yummy_box/provider/trader_provider.dart';
 import 'package:yummy_box/screens/login.dart';
 import 'package:provider/provider.dart';
 
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => PreProvider()),
         ChangeNotifierProvider(create: (ctx) => ProductProvider()),
         ChangeNotifierProvider(create: (ctx) => LocationProvider()),
+        ChangeNotifierProvider(create: (ctx) => TraderProvider()),
       ],
       child: MaterialApp(
         theme: ThemeData(

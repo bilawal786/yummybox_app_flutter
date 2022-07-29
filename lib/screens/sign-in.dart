@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yummy_box/screens/Favourite.dart';
-import 'package:yummy_box/screens/discover.dart';
+import 'package:yummy_box/screens/Home.dart';
 import 'package:yummy_box/screens/map.dart';
 import 'package:yummy_box/screens/reservation.dart';
 import 'package:yummy_box/widgets/drawer.dart';
@@ -17,7 +17,7 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   var index = 0;
   var navList = [
-    MyDiscover(id: '',),
+    MyDiscover(id: '1',),
     MyMap(),
     MyFavourite(),
     MyReservation(),
@@ -40,7 +40,7 @@ class _SignInState extends State<SignIn> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home_filled),
-            label: 'Discover',
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.place),

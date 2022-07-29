@@ -1,5 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:yummy_box/provider/trader_provider.dart';
 import 'package:yummy_box/screens/productdetail.dart';
 import 'package:yummy_box/widgets/drawer.dart';
 
@@ -11,6 +13,19 @@ class MyTraders extends StatefulWidget {
 }
 
 class _MyTradersState extends State<MyTraders> {
+
+
+  var _isInit = true;
+
+  @override
+  void didChangeDependencies() {
+    if(_isInit){
+
+      Provider.of<TraderProvider>(context).getTraders();
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
 
   final List imageUrl = [
     'https://app.yummybox.fr/storage/331/Fruits.png',
@@ -39,6 +54,8 @@ class _MyTradersState extends State<MyTraders> {
   final List _preTitle = ['Renee', '0 Marche', 'Denial'];
   @override
   Widget build(BuildContext context) {
+    final TraderData = Provider.of<TraderProvider>(context, listen: false);
+    final traders = TraderData.traderItems;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -58,7 +75,7 @@ class _MyTradersState extends State<MyTraders> {
               child: ListView.builder(
                 shrinkWrap: true,
                 physics: ClampingScrollPhysics(),
-                itemCount: 5,
+                itemCount: traders.length,
                 itemBuilder: (ctx, index) => GestureDetector(
                   onTap: () {
                     // Navigator.push(context,
@@ -70,7 +87,7 @@ class _MyTradersState extends State<MyTraders> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Image.network(
-                            "https://app.yummybox.fr/storage/386/5eae051b03933_ecomax-1359680.jpg",
+                            traders[index].shopImage,
                             height: 150,
                             width: 150,
                           ),
@@ -82,7 +99,7 @@ class _MyTradersState extends State<MyTraders> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "COLIPRIX (ECOMAX) ",
+                             traders[index].shopName,
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.red,
@@ -90,7 +107,7 @@ class _MyTradersState extends State<MyTraders> {
                               ),
                             ),
                             Text(
-                              "Bergevin",
+                              traders[index].country,
                               style: TextStyle(
                                 fontSize: 15,
                                 color: Colors.red,
@@ -106,7 +123,7 @@ class _MyTradersState extends State<MyTraders> {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     Image.network(
-                                      "https://app.yummybox.fr/category/1649248522category.png",
+                                      traders[index].shopLogo,
                                       height: 40,
                                       width: 40,
                                     ),
@@ -119,7 +136,7 @@ class _MyTradersState extends State<MyTraders> {
                                       ),
                                     ),
                                     Text(
-                                      "187",
+                                      traders[index].likes.toString(),
                                       style: TextStyle(
                                         color: Colors.red,
                                         fontSize: 10,
@@ -129,11 +146,21 @@ class _MyTradersState extends State<MyTraders> {
                                 ),
                               ),
                             ),
-                            Text(
-                              "Available from 08:30 a 20:00",
-                              style: TextStyle(
-                                fontSize: 8,
-                                color: Colors.black,
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text('Available from', style: TextStyle(fontSize: 8, color: Colors.black),),
+                                  SizedBox(width: 2,),
+                                  Text(traders[index].openingTime, style: TextStyle(color: Colors.black, fontSize: 10, fontWeight: FontWeight.bold),),
+                                  SizedBox(width: 2,),
+                                  Text('a', style: TextStyle(fontSize: 10),),
+                                  SizedBox(width: 2,),
+                                  Text(traders[index].closingTime, style: TextStyle(color: Colors.black, fontSize: 10, fontWeight: FontWeight.bold),),
+                                ],
                               ),
                             ),
                           ],
