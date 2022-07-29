@@ -38,6 +38,7 @@ class _MyDrawerState extends State<MyDrawer> {
 
 
   String? valueChoose = "";
+  bool isLoggedIn = false;
   List listItem = [
     "Guadeloupe",
     "Martinique",
@@ -51,8 +52,8 @@ class _MyDrawerState extends State<MyDrawer> {
     await preferences.clear();
   }
 
-  String username = '';
   String img = '';
+  String name = '';
   String points = '';
 
   @override
@@ -64,9 +65,9 @@ class _MyDrawerState extends State<MyDrawer> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
 
-      username = (prefs.getString('username') ?? '');
-      img = (prefs.getString('img') ?? '');
-      points = (prefs.getString('points') ?? '');
+      img = (prefs.getString('img') ?? "");
+      name = (prefs.getString('name') ?? 'Guest User');
+      points = (prefs.getString('points') ?? '  Yummycoins0');
 
     });
   }
@@ -101,15 +102,16 @@ class _MyDrawerState extends State<MyDrawer> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                '$username',
+                '$name',
                 style: TextStyle(color: Colors.white),
               ),
+              SizedBox(width: 2,),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('$points', style: TextStyle(color: Colors.white),),
+              Text('$points', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),),
               // Text(
               //   " YummyCoin",
               //   style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -303,26 +305,28 @@ class _MyDrawerState extends State<MyDrawer> {
           ),
 
 
+          
           Padding(
             padding: const EdgeInsets.only(left: 20),
-            child: ListTile(
-              onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Login()),
-              ),
-              leading: Icon(
-                CupertinoIcons.lock,
-                color: Colors.white,
-              ),
-              title: Transform.translate(
-                offset: Offset(-25, 0),
-                child: Text(
-                  'Disconnect',
-                  textScaleFactor: 1,
-                  style: TextStyle(color: Colors.white),
+            child: Row(
+              children: [
+                IconButton(
+                  onPressed: (){
+                    Navigator.push(context,
+                                 MaterialPageRoute(builder: (context) => Login()),
+                            );
+                    OnDisconnect ();
+
+                  },
+
+                  icon: Icon(Icons.lock, color: Colors.white,),
                 ),
-              ),
+                SizedBox(width: 5,),
+                Text('Logout', style: TextStyle(color: Colors.white),),
+              ],
             ),
           ),
+          
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [

@@ -1,13 +1,10 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yummy_box/screens/sign-in.dart';
-
 import '../model/login_model.dart';
 import '../provider/location_provider.dart';
-import 'discover.dart';
 import 'package:http/http.dart' as http;
 
 class RegisterScreen extends StatefulWidget {
@@ -20,13 +17,14 @@ class _SignUpState extends State<RegisterScreen> {
 
   final TextEditingController _pass = TextEditingController();
   final TextEditingController _confirmPass = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController FirstNameController = TextEditingController();
-  TextEditingController LastNameController = TextEditingController();
-  TextEditingController PhoneController = TextEditingController();
+ final TextEditingController emailController = TextEditingController();
+ final TextEditingController FirstNameController = TextEditingController();
+ final TextEditingController LastNameController = TextEditingController();
+ final TextEditingController PhoneController = TextEditingController();
+  final TextEditingController AddressController = TextEditingController();
+  final TextEditingController RefferalController = TextEditingController();
 
-  Future<void> login(email, password, first_name, last_name, phone,) async {
+  Future<void> login() async {
 
     var response = await http.post(
       Uri.parse('https://demo.yummybox.fr/api/register'),
@@ -36,10 +34,14 @@ class _SignUpState extends State<RegisterScreen> {
       },
       body: jsonEncode(<String, String>{
         'email': emailController.text,
-        'password': passwordController.text,
+        'password': _pass.text,
         'first_name': FirstNameController.text,
         'last_name': LastNameController.text,
         'phone': PhoneController.text,
+        'address': AddressController.text,
+        'roles': "2",
+        'refferal': RefferalController.text,
+
       }),
     );
     if (response.statusCode == 200) {
@@ -48,17 +50,12 @@ class _SignUpState extends State<RegisterScreen> {
 
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setString('token', login.token);
+      await prefs.setInt('role', login.user.roles);
       await prefs.setString('email', login.user.email);
-      await prefs.setInt('id', login.user.id);
       await prefs.setString('points', login.user.points);
-      await prefs.setInt('roles', login.user.roles);
-      await prefs.setString('phone', login.user.phone);
-      await prefs.setString('address', login.user.address);
-      await prefs.setString('timezone', login.user.timezone);
-      await prefs.setInt('balance_id', login.user.balanceId);
       await prefs.setString('refferal', login.user.refferal);
       await prefs.setString('img', login.user.img);
-      print("success respinse "+response.body);
+      await prefs.setString('name', login.user.name);
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => SignIn()),
@@ -66,11 +63,9 @@ class _SignUpState extends State<RegisterScreen> {
     } else {
       print('Login api not working');
     }
+    print("success response "+response.body);
+
     // print("Server response" + response.body);
-  }
-  OnRegisterPressed() {
-    login(emailController.text, passwordController.text, FirstNameController.text,
-      FirstNameController.text, LastNameController.text,);
   }
 
   @override
@@ -81,10 +76,13 @@ class _SignUpState extends State<RegisterScreen> {
   @override
   void dispose() {
     emailController.dispose();
-    passwordController.dispose();
     FirstNameController.dispose();
     LastNameController.dispose();
     PhoneController.dispose();
+    _pass.dispose();
+    _confirmPass.dispose();
+    AddressController.dispose();
+    RefferalController.dispose();
     super.dispose();
   }
 
@@ -302,7 +300,7 @@ class _SignUpState extends State<RegisterScreen> {
                         vertical: 10.0, horizontal: 20.0),
                     child: TextFormField(
 
-                      controller: passwordController,
+                      controller: _pass,
                       style: TextStyle(
                         fontSize: 12,
                       ),
@@ -314,12 +312,11 @@ class _SignUpState extends State<RegisterScreen> {
                           hintText: 'Enter your password',
                           labelText: 'Enter your password',
                           iconColor: Colors.white),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter password';
+                        validator: (val){
+                          if(val!.isEmpty)
+                            return 'Empty';
+                          return null;
                         }
-                        return null;
-                      },
                     ),
                   ),
 
@@ -327,7 +324,8 @@ class _SignUpState extends State<RegisterScreen> {
                     padding: const EdgeInsets.symmetric(
                         vertical: 10.0, horizontal: 20.0),
                     child: TextFormField(
-
+                   controller: _confirmPass,
+                      obscureText: true,
                       style: TextStyle(
                         fontSize: 12,
                       ),
@@ -339,12 +337,13 @@ class _SignUpState extends State<RegisterScreen> {
                           hintText: 'Password confirmation',
                           labelText: 'Password Confirmation',
                           iconColor: Colors.white),
-                      // validator: (value) {
-                      //   if (value == null || value.isEmpty) {
-                      //     return 'Password not matched';
-                      //   }
-                      //   return null;
-                      // },
+                        validator: (val){
+                          if(val!.isEmpty)
+                            return 'Empty';
+                          if(val != _pass.text)
+                            return 'Not Match';
+                          return null;
+                        }
                     ),
                   ),
 
@@ -411,7 +410,7 @@ class _SignUpState extends State<RegisterScreen> {
                                 const SnackBar(content: Text('Processing Data')),
                               );
                             }
-                            OnRegisterPressed();
+                            login();
 
                           },
                           shape: RoundedRectangleBorder(
