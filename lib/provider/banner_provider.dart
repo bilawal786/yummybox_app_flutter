@@ -13,9 +13,9 @@ class BannerProvider with ChangeNotifier {
     return [..._items];
   }
 
-  Future<void> getBanners() async {
+  Future<void> getBanners(id) async {
     var response = await http.get(
-      Uri.parse('http://app.yummybox.fr/api/setting/1'),
+      Uri.parse('http://app.yummybox.fr/api/setting/'+id),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',

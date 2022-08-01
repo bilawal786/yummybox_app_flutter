@@ -13,9 +13,9 @@ class ProductProvider with ChangeNotifier {
     return [..._items];
   }
 
-  Future<void> getProducts() async {
+  Future<void> getProducts(id) async {
     var response = await http.get(
-      Uri.parse('https://demo.yummybox.fr/api/products/1'),
+      Uri.parse('https://demo.yummybox.fr/api/products/'+id),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',

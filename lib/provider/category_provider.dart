@@ -12,9 +12,9 @@ class CategoryProvider with ChangeNotifier {
     return [..._items];
   }
 
-  Future<void> getCategories() async {
+  Future<void> getCategories(id) async {
     var response = await http.get(
-      Uri.parse('http://app.yummybox.fr/api/category/1'),
+      Uri.parse('http://app.yummybox.fr/api/category/'+id),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
@@ -30,7 +30,6 @@ class CategoryProvider with ChangeNotifier {
             description: e['description'],
             image: e['image'],
             quantity: e['quantity'],
-            slug: e['slug'],
             title: e['title'],
           ),
         );

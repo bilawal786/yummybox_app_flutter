@@ -27,27 +27,17 @@ class _MyDrawerState extends State<MyDrawer> {
 
   @override
   void didChangeDependencies() {
-    if(_isInit){
+    if (_isInit) {
       Provider.of<LocationProvider>(context).getLocations();
-
     }
     _isInit = false;
     super.didChangeDependencies();
   }
 
-
-
   String? valueChoose = "";
   bool isLoggedIn = false;
-  List listItem = [
-    "Guadeloupe",
-    "Martinique",
-    "Guyane",
-    "Le Reunion",
-    "Saint-Martin"
-  ];
 
-  OnDisconnect () async{
+  OnDisconnect() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     await preferences.clear();
   }
@@ -61,14 +51,13 @@ class _MyDrawerState extends State<MyDrawer> {
     super.initState();
     _loadCounter();
   }
+
   _loadCounter() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-
-      img = (prefs.getString('img') ??'assets/user.png');
+      img = (prefs.getString('img') ?? 'assets/user.png');
       name = (prefs.getString('name') ?? 'Guest User');
       points = (prefs.getString('points') ?? '  Yummycoins0');
-
     });
   }
 
@@ -91,13 +80,16 @@ class _MyDrawerState extends State<MyDrawer> {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(50),
-                child: Image.network( '$img',
-                fit: BoxFit.cover,
+                child: Image.network(
+                  '$img',
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
           ),
-          SizedBox(height: 10,),
+          SizedBox(
+            height: 10,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -105,13 +97,21 @@ class _MyDrawerState extends State<MyDrawer> {
                 '$name',
                 style: TextStyle(color: Colors.white),
               ),
-              SizedBox(width: 2,),
+              SizedBox(
+                width: 2,
+              ),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('$points', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),),
+              Text(
+                '$points',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16),
+              ),
               // Text(
               //   " YummyCoin",
               //   style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -140,8 +140,6 @@ class _MyDrawerState extends State<MyDrawer> {
               ),
             ),
           ),
-
-
           Padding(
             padding: const EdgeInsets.only(left: 20),
             child: ListTile(
@@ -161,7 +159,6 @@ class _MyDrawerState extends State<MyDrawer> {
               ),
             ),
           ),
-
           Padding(
             padding: const EdgeInsets.only(left: 20),
             child: ListTile(
@@ -181,8 +178,6 @@ class _MyDrawerState extends State<MyDrawer> {
               ),
             ),
           ),
-
-
           Padding(
             padding: const EdgeInsets.only(left: 20),
             child: ListTile(
@@ -221,13 +216,11 @@ class _MyDrawerState extends State<MyDrawer> {
               ),
             ),
           ),
-
-
           Padding(
             padding: const EdgeInsets.only(left: 20),
             child: ListTile(
-              onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => MySuggest())),
+              onTap: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => MySuggest())),
               leading: Icon(
                 CupertinoIcons.building_2_fill,
                 color: Colors.white,
@@ -242,8 +235,6 @@ class _MyDrawerState extends State<MyDrawer> {
               ),
             ),
           ),
-
-
           Padding(
             padding: const EdgeInsets.only(left: 20),
             child: ListTile(
@@ -263,7 +254,6 @@ class _MyDrawerState extends State<MyDrawer> {
               ),
             ),
           ),
-
           Container(
             height: 30,
             width: 250,
@@ -271,7 +261,6 @@ class _MyDrawerState extends State<MyDrawer> {
               borderRadius: BorderRadius.circular(30),
               color: Colors.white,
             ),
-
             child: DropdownButton(
               hint: Padding(
                 padding: const EdgeInsets.only(left: 16),
@@ -283,14 +272,13 @@ class _MyDrawerState extends State<MyDrawer> {
                   ),
                 ),
               ),
-              onChanged: (newvalue)
-              {
+              onChanged: (newvalue) {
                 setState(() {
                   valueChoose = newvalue.toString();
                 });
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => SignIn()),
+                  MaterialPageRoute(builder: (context) => SignIn(id: valueChoose.toString())),
                 );
               },
               items: locations.map((locationitems) {
@@ -303,30 +291,33 @@ class _MyDrawerState extends State<MyDrawer> {
               underline: const SizedBox(),
             ),
           ),
-
-
-          
           Padding(
             padding: const EdgeInsets.only(left: 20),
             child: Row(
               children: [
                 IconButton(
-                  onPressed: (){
-                    Navigator.push(context,
-                                 MaterialPageRoute(builder: (context) => Login()),
-                            );
-                    OnDisconnect ();
-
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Login()),
+                    );
+                    OnDisconnect();
                   },
-
-                  icon: Icon(Icons.lock, color: Colors.white,),
+                  icon: Icon(
+                    Icons.lock,
+                    color: Colors.white,
+                  ),
                 ),
-                SizedBox(width: 5,),
-                Text('Logout', style: TextStyle(color: Colors.white),),
+                SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  'Logout',
+                  style: TextStyle(color: Colors.white),
+                ),
               ],
             ),
           ),
-          
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -338,9 +329,9 @@ class _MyDrawerState extends State<MyDrawer> {
                     borderRadius: BorderRadius.circular(20),
                     color: Colors.yellow,
                   ),
-                  child: IconButton(onPressed: ( ) => Navigator.pop(context),
-
-                      icon: Icon(Icons.arrow_back),
+                  child: IconButton(
+                    onPressed: () => Navigator.pop(context),
+                    icon: Icon(Icons.arrow_back),
                     color: Colors.black,
                   ),
                 ),

@@ -8,16 +8,18 @@ import 'package:yummy_box/widgets/drawer.dart';
 import '../widgets/appbar.dart';
 
 class SignIn extends StatefulWidget {
-  const SignIn({Key? key}) : super(key: key);
+  final String id;
+  const SignIn({Key? key, required this.id}) : super(key: key);
 
   @override
   State<SignIn> createState() => _SignInState();
 }
 
 class _SignInState extends State<SignIn> {
+
   var index = 0;
   var navList = [
-    MyDiscover(id: '1',),
+    MyDiscover(id: "1"),
     MyMap(),
     MyFavourite(),
     MyReservation(),

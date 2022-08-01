@@ -58,7 +58,7 @@ class _SignUpState extends State<RegisterScreen> {
       await prefs.setString('name', login.user.name);
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => SignIn()),
+        MaterialPageRoute(builder: (context) => SignIn(id : '1')),
       );
     } else {
       print('Login api not working');

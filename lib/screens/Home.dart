@@ -6,12 +6,9 @@ import 'package:yummy_box/provider/pre_provider.dart';
 import 'package:yummy_box/provider/product_provider.dart';
 import 'package:yummy_box/screens/productdetail.dart';
 import 'package:yummy_box/widgets/product.dart';
-import 'package:yummy_box/widgets/shop.dart';
 
 import '../provider/banner_provider.dart';
 import 'package:provider/provider.dart';
-
-import '../provider/location_provider.dart';
 
 class MyDiscover extends StatefulWidget {
   final String id;
@@ -27,10 +24,10 @@ class _MyDiscoverState extends State<MyDiscover> {
   @override
   void didChangeDependencies() {
     if(_isInit){
-      Provider.of<BannerProvider>(context).getBanners();
-      Provider.of<CategoryProvider>(context).getCategories();
-      Provider.of<PreProvider>(context).getPre();
-      Provider.of<ProductProvider>(context).getProducts();
+      Provider.of<BannerProvider>(context).getBanners(widget.id);
+      Provider.of<CategoryProvider>(context).getCategories(widget.id);
+      Provider.of<PreProvider>(context).getPre(widget.id);
+      Provider.of<ProductProvider>(context).getProducts(widget.id);
     }
     _isInit = false;
     super.didChangeDependencies();

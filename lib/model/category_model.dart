@@ -14,7 +14,6 @@ class CategoryModel with ChangeNotifier{
   CategoryModel({
     required this.id,
     required this.title,
-    required this.slug,
     required this.description,
     required this.image,
     required this.quantity,
@@ -22,7 +21,6 @@ class CategoryModel with ChangeNotifier{
 
   int id;
   String title;
-  String slug;
   String description;
   String image;
   int quantity;
@@ -30,7 +28,6 @@ class CategoryModel with ChangeNotifier{
   factory CategoryModel.fromJson(Map<String, dynamic> json) => CategoryModel(
     id: json["id"],
     title: json["title"],
-    slug: json["slug"],
     description: json["description"],
     image: json["image"],
     quantity: json["quantity"],
@@ -39,7 +36,6 @@ class CategoryModel with ChangeNotifier{
   Map<String, dynamic> toJson() => {
     "id": id,
     "title": title,
-    "slug": slug,
     "description": description,
     "image": image,
     "quantity": quantity,
