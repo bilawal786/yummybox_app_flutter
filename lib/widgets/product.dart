@@ -1,7 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yummy_box/model/product.dart';
+import 'package:yummy_box/model/product_model.dart';
 import 'package:yummy_box/provider/product_provider.dart';
 
 class ProductWidget extends StatefulWidget {

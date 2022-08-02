@@ -27,30 +27,6 @@ class _MyTradersState extends State<MyTraders> {
     super.didChangeDependencies();
   }
 
-  final List imageUrl = [
-    'https://app.yummybox.fr/storage/331/Fruits.png',
-    'https://app.yummybox.fr/storage/330/Divers.png',
-    'https://app.yummybox.fr/storage/329/Produits-Bio.png',
-    'https://app.yummybox.fr/storage/328/Epicerie.png',
-    'https://app.yummybox.fr/storage/327/Boulangerie.png',
-    'https://app.yummybox.fr/storage/326/Lunch.png',
-  ];
-
-  final List _gridItemTitle = [
-    'Fruits/legumes',
-    'Divers',
-    'Produits bio',
-    'Epicerie',
-    'Boulangerie',
-    'Lunch',
-  ];
-
-  final List preImage = [
-    'https://app.yummybox.fr/category/1643659597category.png',
-    'https://app.yummybox.fr/category/1646850567category.png',
-    'https://app.yummybox.fr/category/1649248522category.png',
-  ];
-
   final List _preTitle = ['Renee', '0 Marche', 'Denial'];
   @override
   Widget build(BuildContext context) {

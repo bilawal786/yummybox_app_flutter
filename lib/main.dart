@@ -2,7 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:yummy_box/provider/banner_provider.dart';
 import 'package:yummy_box/provider/category_provider.dart';
+import 'package:yummy_box/provider/favourite_provider.dart';
 import 'package:yummy_box/provider/location_provider.dart';
+import 'package:yummy_box/provider/map_provider.dart';
 import 'package:yummy_box/provider/pre_provider.dart';
 import 'package:yummy_box/provider/product_provider.dart';
 import 'package:yummy_box/provider/trader_provider.dart';
@@ -26,6 +28,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => ProductProvider()),
         ChangeNotifierProvider(create: (ctx) => LocationProvider()),
         ChangeNotifierProvider(create: (ctx) => TraderProvider()),
+        ChangeNotifierProvider(create: (ctx) => MapProvider()),
+        ChangeNotifierProvider(create: (ctx) => FavouriteProvider()),
       ],
       child: MaterialApp(
         theme: ThemeData(

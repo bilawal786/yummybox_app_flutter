@@ -1,22 +1,32 @@
-
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:custom_info_window/custom_info_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 
-
+import '../provider/map_provider.dart';
+import 'package:http/http.dart' as http;
 class MyMap extends StatefulWidget {
-
-
   @override
   State<MyMap> createState() => _MyMapState();
 }
 
 class _MyMapState extends State<MyMap> {
+  var _isInit = true;
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      Provider.of<MapProvider>(context).getMap();
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
+
   CustomInfoWindowController _customInfoWindowController =
-  CustomInfoWindowController();
+      CustomInfoWindowController();
 
   final LatLng _latLng = LatLng(33.6844, 73.0479);
 
@@ -52,10 +62,16 @@ class _MyMapState extends State<MyMap> {
 
   //Set<Marker> _markers = {};
   loadData()async{
-
-    for(int i = 0 ; i < images.length ; i++){
-      print('name'+images[i].toString());
-      final Uint8List markerIcon = await getBytesFromAsset(images[i].toString(), 100);
+    var response = await http.get(
+      Uri.parse('https://demo.yummybox.fr/api/map'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Accept': 'application/json',
+      },
+    );
+    print("respponse map"+response.body);
+    for(int i = 0 ; i < response.body.length ; i++){
+      final Uint8List markerIcon = await getBytesFromAsset("assets/logo-new.png", 100);
 
       if(i == 1 ){
         _markers.add(Marker(
@@ -192,18 +208,13 @@ class _MyMapState extends State<MyMap> {
         ));
       }
 
-      setState(() {
-
-      });
+      setState(() {});
     }
-
-
-
   }
 
   @override
   Widget build(BuildContext context) {
-    // loadData() ;
+
     return Scaffold(
       body: Stack(
         children: <Widget>[

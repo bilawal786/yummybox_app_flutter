@@ -1,7 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:yummy_box/model/product.dart';
+import 'package:yummy_box/model/product_model.dart';
 import 'package:yummy_box/widgets/drawer.dart';
 
 class ProucttDetail extends StatefulWidget {
