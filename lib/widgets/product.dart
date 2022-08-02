@@ -1,6 +1,5 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:yummy_box/model/product_model.dart';
 import 'package:yummy_box/provider/product_provider.dart';
 
@@ -110,13 +109,15 @@ class _ProductWidgetState extends State<ProductWidget> {
                       ),
                       Text("€", style: TextStyle(fontSize: 14, color: Colors.red),),
                       SizedBox(width: 3,),
-                      Text(
-                        widget.products.price,
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                            decoration: TextDecoration.lineThrough
+                      Expanded(
+                        child: Text(
+                          widget.products.price,
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                              decoration: TextDecoration.lineThrough
+                          ),
                         ),
                       ),
                       Text('€', style: TextStyle(fontSize: 14, color: Colors.black),),

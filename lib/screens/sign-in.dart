@@ -16,7 +16,6 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-
   var index = 0;
   var navList = [
     MyDiscover(id: "1"),
@@ -32,7 +31,7 @@ class _SignInState extends State<SignIn> {
       bottomNavigationBar: BottomNavigationBar(
         onTap: (value) => setState(() {
           index = value;
-          print(index);
+          print(widget.id.toString());
         }),
         currentIndex: index,
         type: BottomNavigationBarType.fixed,

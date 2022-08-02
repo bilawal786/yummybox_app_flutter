@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:custom_info_window/custom_info_window.dart';
@@ -69,144 +70,67 @@ class _MyMapState extends State<MyMap> {
         'Accept': 'application/json',
       },
     );
-    print("respponse map"+response.body);
-    for(int i = 0 ; i < response.body.length ; i++){
+   var data = jsonDecode(response.body);
+   print(data);
+    for(int i = 0 ; i < data.length ; i++){
       final Uint8List markerIcon = await getBytesFromAsset("assets/logo-new.png", 100);
 
-      if(i == 1 ){
-        _markers.add(Marker(
-            markerId: MarkerId('2'),
-            position: LatLng(33.6992,  72.9744),
-            icon: BitmapDescriptor.fromBytes(markerIcon),
-            onTap: () {
-              _customInfoWindowController.addInfoWindow!(
-                Column(
+      _markers.add( Marker(
+          markerId: MarkerId(i.toString()),
+          position: LatLng(double.parse(data[i]['latitude']), double.parse(data[i]['longitude'])),
+          icon: BitmapDescriptor.fromBytes(markerIcon),
+          onTap: () {
+            _customInfoWindowController.addInfoWindow!(
+              Container(
+                width: 300,
+                height: 150,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
                       child: Container(
-                        width: 300,
-                        height: 150,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: Colors.grey),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Container(
-                                  width: double.infinity,
-                                  child: Image.asset("assets/logo-new.png", fit: BoxFit.cover,)),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10 , left: 10 , right: 10),
-                              child: Row(
-                                  children: [
-                                    SizedBox(
-                                      width: 100,
-                                      child: Text(
-                                        'Yummy Box',
-                                        maxLines: 1,
-                                        overflow: TextOverflow.fade,
-                                        softWrap: false,
-                                      ),
-                                    ),
-                                    const Spacer(),
-                                    Padding(
-                                      padding: const EdgeInsets.only(bottom: 5),
-                                      child: Container(
-                                        height: 30,
-                                        width: 30,
-                                        child: Image.asset("assets/logo-new.png"),
-                                      ),
-                                    ),
-                                  ]
-                              ),
-                            ),
-
-                          ],
-                        ),
-                      ),
+                          width: double.infinity,
+                          child: Image.network(data[i]['image'], fit: BoxFit.cover,)),
                     ),
-                  ],
-                ),
-                LatLng(33.6992,  72.9744),
-              );
-            }
-        ));
-      }else {
-        _markers.add( Marker(
-            markerId: MarkerId(i.toString()),
-            position: LatLng(33.6844, 73.0479),
-            icon: BitmapDescriptor.fromBytes(markerIcon),
-            onTap: () {
-              _customInfoWindowController.addInfoWindow!(
-                Container(
-                  width: 300,
-                  height: 150,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Container(
-                            width: double.infinity,
-                            child: Image.asset("assets/logo-new.png", fit: BoxFit.cover,)),
-                      ),
-                      // Container(
-                      //   width: 200,
-                      //   height: 100,
-                      //   decoration: BoxDecoration(
-                      //     image: DecorationImage(
-                      //         image: AssetImage(images[1]),
-                      //         fit: BoxFit.fitWidth,
-                      //         filterQuality: FilterQuality.high),
-                      //     borderRadius: const BorderRadius.all(
-                      //       Radius.circular(10.0),
-                      //     ),
-                      //   ),
-                      // ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10 , left: 10 , right: 10),
-                        child: Row(
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10 , left: 10 , right: 10),
+                      child: Row(
                           children: [
                             SizedBox(
                               width: 100,
                               child: Text(
-                                'Yummy Box',
+                                data[i]['name'],
                                 maxLines: 1,
                                 overflow: TextOverflow.fade,
                                 softWrap: false,
                               ),
                             ),
                             const Spacer(),
-                           Padding(
-                             padding: const EdgeInsets.only(bottom: 5),
-                             child: Container(
-                               height: 30,
-                               width: 30,
-                               child: Image.asset("assets/logo-new.png"),
-                             ),
-                           ),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 5),
+                              child: Container(
+                                height: 30,
+                                width: 30,
+                                child: Image.network(data[i]['logo']),
+                              ),
+                            ),
                           ]
-                        ),
                       ),
+                    ),
 
-                    ],
-                  ),
+                  ],
                 ),
-                LatLng(33.6844, 73.0479),
-              );
-            }
-        ));
-      }
+              ),
+              LatLng(double.parse(data[i]['latitude']), double.parse(data[i]['longitude'])),
+            );
+          }
+      ));
 
       setState(() {});
     }

@@ -53,6 +53,5 @@ class ProductProvider with ChangeNotifier {
     } else {
       print("request not work");
     }
-    print(response.body);
   }
 }
